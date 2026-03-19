@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Muscle Groups{% endblock %}
+
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold">Muscle Groups</h2>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for muscle_group in muscle_groups %}
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">{{ muscle_group.name }}</h5>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12">
+        <p class="text-muted">There are no muscle groups.</p>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
