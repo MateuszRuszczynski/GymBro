@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Members{% endblock %}
+
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold">Members</h2>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for user in gym_users %}
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">{{ user.get_full_name }}</h5>
+            <span class="badge bg-secondary mb-2">{{ user.get_membership_type_display }}</span>
+            <p class="card-text text-muted small">{{ user.bio }}</p>
+          </div>
+          <div class="card-footer d-flex justify-content-between align-items-center">
+            <small class="text-muted">{{ user.username }}</small>
+            {% if user.date_of_birth %}
+              <small class="text-muted">{{ user.date_of_birth }}</small>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12">
+        <p class="text-muted">There are no members.</p>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
