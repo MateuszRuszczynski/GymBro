@@ -1,0 +1,347 @@
+[
+  {
+    "model": "tracker.musclegroup",
+    "pk": 1,
+    "fields": { "name": "Chest" }
+  },
+  {
+    "model": "tracker.musclegroup",
+    "pk": 2,
+    "fields": { "name": "Back" }
+  },
+  {
+    "model": "tracker.musclegroup",
+    "pk": 3,
+    "fields": { "name": "Legs" }
+  },
+  {
+    "model": "tracker.musclegroup",
+    "pk": 4,
+    "fields": { "name": "Shoulders" }
+  },
+  {
+    "model": "tracker.musclegroup",
+    "pk": 5,
+    "fields": { "name": "Arms" }
+  },
+  {
+    "model": "tracker.musclegroup",
+    "pk": 6,
+    "fields": { "name": "Core" }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 1,
+    "fields": {
+      "name": "Bench Press",
+      "description": "Classic chest exercise using a barbell on a flat bench.",
+      "difficulty": "intermediate",
+      "equipment": "Barbell",
+      "muscle_group": 1
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 2,
+    "fields": {
+      "name": "Incline Dumbbell Press",
+      "description": "Upper chest focused press on an incline bench.",
+      "difficulty": "intermediate",
+      "equipment": "Dumbbell",
+      "muscle_group": 1
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 3,
+    "fields": {
+      "name": "Push Up",
+      "description": "Bodyweight chest exercise. Great for beginners.",
+      "difficulty": "beginner",
+      "equipment": "Bodyweight",
+      "muscle_group": 1
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 4,
+    "fields": {
+      "name": "Pull Up",
+      "description": "Compound back exercise using bodyweight.",
+      "difficulty": "intermediate",
+      "equipment": "Bodyweight",
+      "muscle_group": 2
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 5,
+    "fields": {
+      "name": "Deadlift",
+      "description": "King of all exercises. Works the entire posterior chain.",
+      "difficulty": "advanced",
+      "equipment": "Barbell",
+      "muscle_group": 2
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 6,
+    "fields": {
+      "name": "Barbell Row",
+      "description": "Horizontal pulling movement for a thick back.",
+      "difficulty": "intermediate",
+      "equipment": "Barbell",
+      "muscle_group": 2
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 7,
+    "fields": {
+      "name": "Squat",
+      "description": "The fundamental leg exercise for strength and mass.",
+      "difficulty": "intermediate",
+      "equipment": "Barbell",
+      "muscle_group": 3
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 8,
+    "fields": {
+      "name": "Leg Press",
+      "description": "Machine exercise targeting quads, hamstrings and glutes.",
+      "difficulty": "beginner",
+      "equipment": "Machine",
+      "muscle_group": 3
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 9,
+    "fields": {
+      "name": "Romanian Deadlift",
+      "description": "Hip hinge movement targeting hamstrings and glutes.",
+      "difficulty": "intermediate",
+      "equipment": "Barbell",
+      "muscle_group": 3
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 10,
+    "fields": {
+      "name": "Overhead Press",
+      "description": "Vertical pressing movement for shoulder strength.",
+      "difficulty": "intermediate",
+      "equipment": "Barbell",
+      "muscle_group": 4
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 11,
+    "fields": {
+      "name": "Lateral Raise",
+      "description": "Isolation exercise for the lateral deltoid.",
+      "difficulty": "beginner",
+      "equipment": "Dumbbell",
+      "muscle_group": 4
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 12,
+    "fields": {
+      "name": "Barbell Curl",
+      "description": "Classic bicep isolation exercise.",
+      "difficulty": "beginner",
+      "equipment": "Barbell",
+      "muscle_group": 5
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 13,
+    "fields": {
+      "name": "Tricep Pushdown",
+      "description": "Cable exercise isolating the triceps.",
+      "difficulty": "beginner",
+      "equipment": "Cable",
+      "muscle_group": 5
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 14,
+    "fields": {
+      "name": "Plank",
+      "description": "Isometric core exercise for stability and endurance.",
+      "difficulty": "beginner",
+      "equipment": "Bodyweight",
+      "muscle_group": 6
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 15,
+    "fields": {
+      "name": "Cable Crunch",
+      "description": "Weighted ab exercise using a cable machine.",
+      "difficulty": "intermediate",
+      "equipment": "Cable",
+      "muscle_group": 6
+    }
+  },
+  {
+    "model": "tracker.gymuser",
+    "pk": 1,
+    "fields": {
+      "username": "john_doe",
+      "email": "john@gymbro.com",
+      "first_name": "John",
+      "last_name": "Doe",
+      "password": "pbkdf2_sha256$720000$test$dummyhash",
+      "bio": "Powerlifter focused on strength gains.",
+      "height": "182.00",
+      "weight": "90.00",
+      "date_of_birth": "1995-04-12",
+      "membership_type": "premium",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-01-01T10:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "tracker.gymuser",
+    "pk": 2,
+    "fields": {
+      "username": "jane_fit",
+      "email": "jane@gymbro.com",
+      "first_name": "Jane",
+      "last_name": "Smith",
+      "password": "pbkdf2_sha256$720000$test$dummyhash",
+      "bio": "Loves hypertrophy training and yoga.",
+      "height": "165.00",
+      "weight": "60.00",
+      "date_of_birth": "1998-07-23",
+      "membership_type": "free",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-02-15T10:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "tracker.gymuser",
+    "pk": 3,
+    "fields": {
+      "username": "coach_mike",
+      "email": "mike@gymbro.com",
+      "first_name": "Mike",
+      "last_name": "Johnson",
+      "password": "pbkdf2_sha256$720000$test$dummyhash",
+      "bio": "Certified personal trainer with 10 years experience.",
+      "height": "178.00",
+      "weight": "82.00",
+      "date_of_birth": "1988-11-05",
+      "membership_type": "coach",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-01-10T10:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "tracker.workoutplan",
+    "pk": 1,
+    "fields": {
+      "name": "Beginner Full Body",
+      "description": "A simple 3-day full body program for beginners.",
+      "created_by": 3,
+      "exercises": [3, 8, 11, 14, 12],
+      "goal": "strength",
+      "created_at": "2024-01-15T10:00:00Z"
+    }
+  },
+  {
+    "model": "tracker.workoutplan",
+    "pk": 2,
+    "fields": {
+      "name": "Push Pull Legs",
+      "description": "Classic PPL split for intermediate lifters.",
+      "created_by": 1,
+      "exercises": [1, 2, 10, 4, 5, 6, 7, 9],
+      "goal": "hypertrophy",
+      "created_at": "2024-02-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "tracker.workoutplan",
+    "pk": 3,
+    "fields": {
+      "name": "Strength Powerlifting",
+      "description": "Focus on the big three: squat, bench, deadlift.",
+      "created_by": 1,
+      "exercises": [1, 5, 7],
+      "goal": "strength",
+      "created_at": "2024-03-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "tracker.workoutlog",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "workout_plan": 3,
+      "date": "2024-03-10",
+      "duration_minutes": 75,
+      "notes": "Felt strong today. Hit a new squat PR!",
+      "is_personal_record": true
+    }
+  },
+  {
+    "model": "tracker.workoutlog",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "workout_plan": 1,
+      "date": "2024-03-11",
+      "duration_minutes": 45,
+      "notes": "Good session, getting the hang of it.",
+      "is_personal_record": false
+    }
+  },
+  {
+    "model": "tracker.workoutlog",
+    "pk": 3,
+    "fields": {
+      "user": 1,
+      "workout_plan": 2,
+      "date": "2024-03-12",
+      "duration_minutes": 90,
+      "notes": "Tough push day. Shoulders were on fire.",
+      "is_personal_record": false
+    }
+  },
+  {
+    "model": "tracker.workoutlog",
+    "pk": 4,
+    "fields": {
+      "user": 3,
+      "workout_plan": 2,
+      "date": "2024-03-13",
+      "duration_minutes": 60,
+      "notes": "Coached Jane through the session.",
+      "is_personal_record": false
+    }
+  }
+]
