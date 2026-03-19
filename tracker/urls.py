@@ -15,7 +15,7 @@ urlpatterns = [
     path("", index, name="index"),
     path("exercises/", ExerciseListView.as_view(), name="exercise-list"),
     path("musclegroups/", MuscleGroupListView.as_view(), name="muscle-group-list"),
-    path("gymusers/", GymUserListView.as_view(), name="gymu-uer-list"),
+    path("gymusers/", GymUserListView.as_view(), name="gym-user-list"),
     path("workoutlogs/", WorkoutLogListView.as_view(), name="workout-log-list"),
     path("workoutplans/", WorkoutPlanListView.as_view(), name="workout-plan-list"),
 ]
