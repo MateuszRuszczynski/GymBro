@@ -24,7 +24,8 @@
         </thead>
         <tbody>
         {% for exercise in exercises %}
-          <tr>
+          <tr onclick="window.location='{% url 'tracker:exercise-detail' pk=exercise.pk %}'"
+              class="clickable-row">
             <td class="text-muted small">{{ forloop.counter }}</td>
             <td>
               <div class="fw-semibold">{{ exercise.name }}</div>
