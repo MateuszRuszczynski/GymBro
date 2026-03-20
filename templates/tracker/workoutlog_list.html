@@ -9,22 +9,25 @@
 
   <div class="row row-cols-1 row-cols-md-3 g-4">
     {% for log in workout_logs %}
-      <div class="col">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">{{ log.workout_plan.name }}</h5>
-            <span class="badge bg-secondary mb-2">{{ log.user.get_full_name }}</span>
-            <p class="card-text text-muted small">{{ log.notes }}</p>
-          </div>
-          <div class="card-footer d-flex justify-content-between align-items-center">
-            <small class="text-muted">{{ log.date }}</small>
-            <small class="text-muted">{{ log.duration_minutes }} min</small>
-            {% if log.is_personal_record %}
-              <span class="badge bg-warning text-dark">PR</span>
-            {% endif %}
+      <a href="{% url 'tracker:workout-log-detail' pk=log.pk %}"
+         class="text-decoration-none">
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">{{ log.workout_plan.name }}</h5>
+              <span class="badge bg-secondary mb-2">{{ log.user.get_full_name }}</span>
+              <p class="card-text text-muted small">{{ log.notes }}</p>
+            </div>
+            <div class="card-footer d-flex justify-content-between align-items-center">
+              <small class="text-muted">{{ log.date }}</small>
+              <small class="text-muted">{{ log.duration_minutes }} min</small>
+              {% if log.is_personal_record %}
+                <span class="badge bg-warning text-dark">PR</span>
+              {% endif %}
+            </div>
           </div>
         </div>
-      </div>
+      </a>
     {% empty %}
       <div class="col-12">
         <p class="text-muted">There are no workout logs.</p>

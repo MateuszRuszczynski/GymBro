@@ -26,7 +26,8 @@
         </thead>
         <tbody>
         {% for user in gym_users %}
-          <tr>
+          <tr onclick="window.location='{% url 'tracker:gym-user-detail' pk=user.pk %}'"
+              class="clickable-row">
             <td class="text-muted small">{{ forloop.counter }}</td>
             <td>
               <div class="fw-semibold">{{ user.get_full_name }}</div>
