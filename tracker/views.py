@@ -9,15 +9,19 @@ def index(request):
     return render(request, "tracker/index.html")
 
 
+exercise_queryset = Exercise.objects.select_related("muscle_group")
+
+
 class ExerciseListView(ListView):
     model = Exercise
     context_object_name = "exercises"
-    queryset = Exercise.objects.select_related("muscle_group")
+    queryset = exercise_queryset
 
 
 class ExerciseDetailView(DetailView):
     model = Exercise
     context_object_name = "exercise"
+    queryset = exercise_queryset
 
 
 class ExerciseCreateView(CreateView):
@@ -96,18 +100,22 @@ class GymUserDeleteView(DeleteView):
     success_url = reverse_lazy("tracker:gym-user-list")
 
 
+workoutlog_queryset = WorkoutLog.objects.select_related(
+    "user",
+    "workout_plan",
+)
+
+
 class WorkoutLogListView(ListView):
     model = WorkoutLog
     context_object_name = "workout_logs"
-    queryset = WorkoutLog.objects.select_related(
-        "user",
-        "workout_plan",
-    )
+    queryset = workoutlog_queryset
 
 
 class WorkoutLogDetailView(DetailView):
     model = WorkoutLog
     context_object_name = "workout_log"
+    queryset = workoutlog_queryset
 
 
 class WorkoutLogCreateView(CreateView):
@@ -127,15 +135,21 @@ class WorkoutLogDeleteView(DeleteView):
     success_url = reverse_lazy("tracker:workout-log-list")
 
 
+workoutplan_queryset = WorkoutPlan.objects.select_related(
+    "created_by"
+).prefetch_related("exercises")
+
+
 class WorkoutPlanListView(ListView):
     model = WorkoutPlan
     context_object_name = "workout_plans"
-    queryset = WorkoutPlan.objects.select_related("created_by").prefetch_related("exercises")
+    queryset = workoutplan_queryset
 
 
 class WorkoutPlanDetailView(DetailView):
     model = WorkoutPlan
     context_object_name = "workout_plan"
+    queryset = workoutplan_queryset
 
 
 class WorkoutPlanCreateView(CreateView):
