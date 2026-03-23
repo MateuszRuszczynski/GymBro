@@ -1,0 +1,4 @@
+{% extends "includes/base_confirm_delete.html" %}
+
+{% block object_name %}{{ workout_plan.name }}{% endblock %}
+{% block cancel_url %}{% url 'tracker:workout-plan-list' %}{% endblock %}

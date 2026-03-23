@@ -9,35 +9,35 @@ def index(request):
     return render(request, "tracker/index.html")
 
 
-exercise_queryset = Exercise.objects.select_related("muscle_group")
-
-
 class ExerciseListView(ListView):
     model = Exercise
     context_object_name = "exercises"
-    queryset = exercise_queryset
+    queryset = Exercise.objects.select_related("muscle_group")
 
 
 class ExerciseDetailView(DetailView):
     model = Exercise
     context_object_name = "exercise"
-    queryset = exercise_queryset
+    queryset = Exercise.objects.select_related("muscle_group")
 
 
 class ExerciseCreateView(CreateView):
     model = Exercise
-    success_url = reverse_lazy("tracker:exercise-list")
+    context_object_name = "exercise"
     fields = "__all__"
+    success_url = reverse_lazy("tracker:exercise-list")
 
 
 class ExerciseUpdateView(UpdateView):
     model = Exercise
-    success_url = reverse_lazy("tracker:exercise-list")
+    context_object_name = "exercise"
     fields = "__all__"
+    success_url = reverse_lazy("tracker:exercise-list")
 
 
 class ExerciseDeleteView(DeleteView):
     model = Exercise
+    context_object_name = "exercise"
     success_url = reverse_lazy("tracker:exercise-list")
 
 
@@ -53,6 +53,7 @@ class MuscleGroupDetailView(DetailView):
 
 class MuscleGroupCreateView(CreateView):
     model = MuscleGroup
+    context_object_name = "muscle_group"
     success_url = reverse_lazy("tracker:muscle-group-list")
     fields = "__all__"
 
@@ -60,11 +61,13 @@ class MuscleGroupCreateView(CreateView):
 class MuscleGroupUpdateView(UpdateView):
     model = MuscleGroup
     fields = "__all__"
+    context_object_name = "muscle_group"
     success_url = reverse_lazy("tracker:muscle-group-list")
 
 
 class MuscleGroupDeleteView(DeleteView):
     model = MuscleGroup
+    context_object_name = "muscle_group"
     success_url = reverse_lazy("tracker:muscle-group-list")
 
 
@@ -79,91 +82,97 @@ class GymUserDetailView(DetailView):
     context_object_name = "gym_user"
 
 
-gymuser_fields = ("username", "first_name", "last_name", "email", "bio", "height", "weight", "date_of_birth",
-                  "membership_type")
-
-
 class GymUserCreateView(CreateView):
     model = GymUser
-    fields = gymuser_fields
+    context_object_name = "gym_user"
+    fields = ["username", "first_name", "last_name", "email", "bio", "height", "weight", "date_of_birth",
+              "membership_type"]
     success_url = reverse_lazy("tracker:gym-user-list")
 
 
 class GymUserUpdateView(UpdateView):
     model = GymUser
-    fields = gymuser_fields
+    context_object_name = "gym_user"
+    fields = ["username", "first_name", "last_name", "email", "bio", "height", "weight", "date_of_birth",
+              "membership_type"]
     success_url = reverse_lazy("tracker:gym-user-list")
 
 
 class GymUserDeleteView(DeleteView):
     model = GymUser
+    context_object_name = "gym_user"
     success_url = reverse_lazy("tracker:gym-user-list")
-
-
-workoutlog_queryset = WorkoutLog.objects.select_related(
-    "user",
-    "workout_plan",
-)
 
 
 class WorkoutLogListView(ListView):
     model = WorkoutLog
     context_object_name = "workout_logs"
-    queryset = workoutlog_queryset
+    queryset = WorkoutLog.objects.select_related(
+        "user",
+        "workout_plan",
+    )
 
 
 class WorkoutLogDetailView(DetailView):
     model = WorkoutLog
     context_object_name = "workout_log"
-    queryset = workoutlog_queryset
+    queryset = WorkoutLog.objects.select_related(
+        "user",
+        "workout_plan",
+    )
 
 
 class WorkoutLogCreateView(CreateView):
     model = WorkoutLog
-    success_url = reverse_lazy("tracker:workout-log-list")
+    context_object_name = "workout_log"
     fields = "__all__"
+    success_url = reverse_lazy("tracker:workout-log-list")
 
 
 class WorkoutLogUpdateView(UpdateView):
     model = WorkoutLog
+    context_object_name = "workout_log"
     fields = "__all__"
     success_url = reverse_lazy("tracker:workout-log-list")
 
 
 class WorkoutLogDeleteView(DeleteView):
     model = WorkoutLog
+    context_object_name = "workout_log"
     success_url = reverse_lazy("tracker:workout-log-list")
-
-
-workoutplan_queryset = WorkoutPlan.objects.select_related(
-    "created_by"
-).prefetch_related("exercises")
 
 
 class WorkoutPlanListView(ListView):
     model = WorkoutPlan
     context_object_name = "workout_plans"
-    queryset = workoutplan_queryset
+    queryset = WorkoutPlan.objects.select_related(
+        "created_by"
+    ).prefetch_related("exercises")
 
 
 class WorkoutPlanDetailView(DetailView):
     model = WorkoutPlan
     context_object_name = "workout_plan"
-    queryset = workoutplan_queryset
+    queryset = WorkoutPlan.objects.select_related(
+        "created_by"
+    ).prefetch_related("exercises")
 
 
 class WorkoutPlanCreateView(CreateView):
     model = WorkoutPlan
-    success_url = reverse_lazy("tracker:workout-plan-list")
+    context_object_name = "workout_plan"
     fields = "__all__"
+    success_url = reverse_lazy("tracker:workout-plan-list")
 
 
 class WorkoutPlanUpdateView(UpdateView):
     model = WorkoutPlan
+    context_object_name = "workout_plan"
     fields = "__all__"
     success_url = reverse_lazy("tracker:workout-plan-list")
 
 
 class WorkoutPlanDeleteView(DeleteView):
     model = WorkoutPlan
+    context_object_name = "workout_plan"
     success_url = reverse_lazy("tracker:workout-plan-list")

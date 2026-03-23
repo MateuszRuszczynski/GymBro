@@ -1,0 +1,4 @@
+{% extends "includes/base_confirm_delete.html" %}
+
+{% block object_name %}{{ muscle_group.name }}{% endblock %}
+{% block cancel_url %}{% url 'tracker:muscle-group-list' %}{% endblock %}
