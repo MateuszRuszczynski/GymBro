@@ -23,6 +23,7 @@ class ExerciseDetailView(DetailView):
 class ExerciseCreateView(CreateView):
     model = Exercise
     success_url = reverse_lazy("tracker:exercise-list")
+    fields = "__all__"
 
 
 class MuscleGroupListView(ListView):
@@ -38,6 +39,7 @@ class MuscleGroupDetailView(DetailView):
 class MuscleGroupCreateView(CreateView):
     model = MuscleGroup
     success_url = reverse_lazy("tracker:muscle-group-list")
+    fields = "__all__"
 
 
 class GymUserListView(ListView):
@@ -75,6 +77,7 @@ class WorkoutLogDetailView(DetailView):
 class WorkoutLogCreateView(CreateView):
     model = WorkoutLog
     success_url = reverse_lazy("tracker:workout-log-list")
+    fields = "__all__"
 
 
 class WorkoutPlanListView(ListView):
@@ -91,3 +94,4 @@ class WorkoutPlanDetailView(DetailView):
 class WorkoutPlanCreateView(CreateView):
     model = WorkoutPlan
     success_url = reverse_lazy("tracker:workout-plan-list")
+    fields = "__all__"

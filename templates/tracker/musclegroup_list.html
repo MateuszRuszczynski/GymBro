@@ -5,12 +5,15 @@
 {% block content %}
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="fw-bold">Muscle Groups</h2>
+    <a href="{% url 'tracker:muscle-group-create' %}" class="btn btn-success">
+      + Add muscle group
+    </a>
   </div>
 
   <div class="row row-cols-1 row-cols-md-3 g-4">
     {% for muscle_group in muscle_groups %}
       <a href="{% url 'tracker:muscle-group-detail' pk=muscle_group.pk %}"
-      class="text-decoration-none">
+         class="text-decoration-none">
         <div class="col">
           <div class="card h-100 shadow-sm">
             <div class="card-body">
