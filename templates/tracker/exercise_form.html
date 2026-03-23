@@ -1,0 +1,12 @@
+{% extends "includes/base_form.html" %}
+
+{% block form_title %}
+  {% if object %}
+    Edit exercise
+  {% else %}
+    Add exercise
+  {% endif %}
+{% endblock %}
+{% block cancel_url %}
+  {% url 'tracker:exercise-list' %}
+{% endblock %}

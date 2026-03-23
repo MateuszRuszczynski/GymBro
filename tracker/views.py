@@ -53,6 +53,8 @@ class GymUserDetailView(DetailView):
 
 class GymUserCreateView(CreateView):
     model = GymUser
+    fields = ["username", "first_name", "last_name", "email", "bio", "height", "weight", "date_of_birth",
+              "membership_type"]
     success_url = reverse_lazy("tracker:gym-user-list")
 
 
