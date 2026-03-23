@@ -1,0 +1,12 @@
+{% extends "includes/base_form.html" %}
+
+{% block form_title %}
+  {% if object %}
+    Edit user
+  {% else %}
+    Add user
+  {% endif %}
+{% endblock %}
+{% block cancel_url %}
+  {% url 'tracker:gym-user-list' %}
+{% endblock %}
