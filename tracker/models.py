@@ -19,13 +19,14 @@ MEMBERSHIP_CHOICES = [
 
 class GymUser(AbstractUser):
     bio = models.TextField(max_length=250, blank=True)
-    height = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
-    weight = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    height = models.DecimalField(max_digits=4, decimal_places=1)
+    weight = models.DecimalField(max_digits=4, decimal_places=1)
     date_of_birth = models.DateField(blank=True, null=True)
     membership_type = models.CharField(max_length=20, choices=MEMBERSHIP_CHOICES, default="free")
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
 
 DIFFICULTY_CHOICES = [
     ("beginner", "Beginner"),
@@ -49,7 +50,7 @@ STATUS_CHOICES = [
     ("strength", "Strength"),
     ("hypertrophy", "Hypertrophy"),
     ("endurance", "Endurance"),
-    ("weight_loss", "Weight Loss"),
+    ("weight_loss", "Weight loss"),
 ]
 
 
@@ -57,7 +58,7 @@ class WorkoutPlan(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(max_length=200, blank=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    exercises = models.ManyToManyField(Exercise, related_name="workout_plans")
+    exercises = models.ManyToManyField(Exercise, related_name="workout_plans", blank=True)
     goal = models.CharField(max_length=20, choices=STATUS_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
 

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
+from tracker.forms import ExerciseForm, WorkoutPlanForm, GymUserCreationForm, GymUserUpdateForm
 from tracker.models import Exercise, MuscleGroup, GymUser, WorkoutLog, WorkoutPlan
 
 
@@ -24,14 +25,14 @@ class ExerciseDetailView(DetailView):
 class ExerciseCreateView(CreateView):
     model = Exercise
     context_object_name = "exercise"
-    fields = "__all__"
+    form_class = ExerciseForm
     success_url = reverse_lazy("tracker:exercise-list")
 
 
 class ExerciseUpdateView(UpdateView):
     model = Exercise
     context_object_name = "exercise"
-    fields = "__all__"
+    form_class = ExerciseForm
     success_url = reverse_lazy("tracker:exercise-list")
 
 
@@ -85,16 +86,14 @@ class GymUserDetailView(DetailView):
 class GymUserCreateView(CreateView):
     model = GymUser
     context_object_name = "gym_user"
-    fields = ["username", "first_name", "last_name", "email", "bio", "height", "weight", "date_of_birth",
-              "membership_type"]
+    form_class = GymUserCreationForm
     success_url = reverse_lazy("tracker:gym-user-list")
 
 
 class GymUserUpdateView(UpdateView):
     model = GymUser
     context_object_name = "gym_user"
-    fields = ["username", "first_name", "last_name", "email", "bio", "height", "weight", "date_of_birth",
-              "membership_type"]
+    form_class = GymUserUpdateForm
     success_url = reverse_lazy("tracker:gym-user-list")
 
 
@@ -161,7 +160,7 @@ class WorkoutPlanDetailView(DetailView):
 class WorkoutPlanCreateView(CreateView):
     model = WorkoutPlan
     context_object_name = "workout_plan"
-    fields = "__all__"
+    form_class = WorkoutPlanForm
     success_url = reverse_lazy("tracker:workout-plan-list")
 
 

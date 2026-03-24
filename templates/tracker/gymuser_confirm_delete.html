@@ -1,4 +1,4 @@
 {% extends "includes/base_confirm_delete.html" %}
 
-{% block object_name %}{{ gym_user.name }}{% endblock %}
+{% block object_name %}{{ gym_user.first_name}} {{ gym_user.last_name }}{% endblock %}
 {% block cancel_url %}{% url 'tracker:gym-user-list' %}{% endblock %}
