@@ -1,8 +1,21 @@
 from django import forms
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from datetime import date
 
-from tracker.models import Exercise, WorkoutPlan, GymUser
+from tracker.models import Exercise, WorkoutPlan, WorkoutLog, MuscleGroup
+
+
+class MuscleGroupForm(forms.ModelForm):
+    class Meta:
+        model = MuscleGroup
+        fields = ["name"]
+
+    def clean_name(self):
+        name = self.cleaned_data["name"]
+        if len(name) <= 2:
+            raise forms.ValidationError("Muscle group name must be at least 3 characters.")
+        return name
 
 
 class ExerciseForm(forms.ModelForm):
@@ -28,7 +41,7 @@ class ExerciseForm(forms.ModelForm):
 
 class GymUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
-        model = GymUser
+        model = get_user_model()
         fields = UserCreationForm.Meta.fields + (
             "first_name",
             "last_name",
@@ -53,7 +66,7 @@ class GymUserCreationForm(UserCreationForm):
 
 class GymUserUpdateForm(forms.ModelForm):
     class Meta():
-        model = GymUser
+        model = get_user_model()
         fields = (
             "username",
             "first_name",
@@ -91,6 +104,30 @@ class WorkoutPlanForm(forms.ModelForm):
         if len(exercises) < 1:
             raise forms.ValidationError("The workout plan must have at least one exercise.")
         return exercises
+
+
+class WorkoutLogForm(forms.ModelForm):
+    class Meta:
+        model = WorkoutLog
+        fields = ["workout_plan", "date", "duration_minutes", "notes", "is_personal_record"]
+        widgets = {
+            "date": forms.DateInput(attrs={"type": "date"}),
+            "notes": forms.Textarea(attrs={"rows": 3}),
+        }
+
+    def clean_date(self):
+        log_date = self.cleaned_data["date"]
+        if log_date > date.today():
+            raise forms.ValidationError("You can't log a workout in the future.")
+        return log_date
+
+    def clean_duration_minutes(self):
+        duration = self.cleaned_data["duration_minutes"]
+        if duration <= 0:
+            raise forms.ValidationError("Duration must be greater than 0.")
+        if duration > 300:
+            raise forms.ValidationError("Duration can't be more than 300 minutes.")
+        return duration
 
 
 def validate_height(user_height: float) -> float:
