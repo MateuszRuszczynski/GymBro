@@ -16,8 +16,8 @@
           </div>
         </div>
         <div class="card-footer d-flex gap-2">
-          <a href="#" class="btn btn-warning btn-sm">Edit</a>
-          <a href="#" class="btn btn-danger btn-sm">Delete</a>
+          <a href="{% url 'tracker:muscle-group-update' pk=muscle_group.pk %}" class="btn btn-warning btn-sm">Edit</a>
+          <a href="{% url 'tracker:muscle-group-delete' pk=muscle_group.pk %}" class="btn btn-danger btn-sm">Delete</a>
           <a href="{% url 'tracker:muscle-group-list' %}" class="btn btn-secondary btn-sm ms-auto">Back to list</a>
         </div>
       </div>
