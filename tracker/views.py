@@ -1,10 +1,11 @@
+from django.contrib.auth import login
 from django.db.models import Q
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from tracker.forms import ExerciseForm, WorkoutPlanForm, GymUserCreationForm, GymUserUpdateForm, WorkoutLogForm, \
-    MuscleGroupForm, ExerciseSearchForm
+    MuscleGroupForm
 from tracker.models import Exercise, MuscleGroup, GymUser, WorkoutLog, WorkoutPlan
 
 
@@ -24,6 +25,16 @@ def index(request):
     }
     return render(request, "tracker/index.html")
 
+def register(request):
+    if request.method == "POST":
+        form = GymUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("/")
+    else:
+        form = GymUserUpdateForm()
+    return render(request, "registration/register.html", {"form": form})
 
 class ExerciseListView(ListView):
     model = Exercise
