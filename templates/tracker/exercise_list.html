@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 
 {% block title %}Exercises{% endblock %}
 
@@ -12,7 +13,29 @@
       + Add Exercise
     </a>
   </div>
+  <form method="GET" action="{% url 'tracker:exercise-list' %}" class="mb-4">
+    <div class="input-group input-group-sm shadow-sm rounded-pill overflow-hidden border">
+    <span class="input-group-text bg-white border-0 ps-4 text-muted">
+       🔎
+    </span>
+      <input type="text"
+             name="exercise"
+             class="form-control border-0 py-3 shadow-none"
+             placeholder="Search exercises by name or muscle group..."
+             value="{{ request.GET.exercise }}"
+      >
 
+      {% if request.GET.exercise %}
+        <a href="{% url 'tracker:exercise-list' %}"
+           class="btn btn-white border-0 d-flex align-items-center text-muted px-3">
+          <span>&times;</span>
+        </a>
+      {% endif %}
+      <button class="btn btn-primary px-5" type="submit">
+        Search
+      </button>
+    </div>
+  </form>
   <div class="card shadow-sm">
     <div class="table-responsive">
       <table class="table table-hover align-middle mb-0">
