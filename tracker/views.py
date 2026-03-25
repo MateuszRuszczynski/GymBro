@@ -12,7 +12,7 @@ from tracker.models import Exercise, MuscleGroup, GymUser, WorkoutLog, WorkoutPl
 def index(request):
     context = {
         "total_exercises": Exercise.objects.count(),
-        "tota;_members": MuscleGroup.objects.count(),
+        "total_members": GymUser.objects.count(),
         "total_plans": WorkoutPlan.objects.count(),
         "total_logs": WorkoutLog.objects.count(),
         "recent_logs": WorkoutLog.objects.select_related(
@@ -23,7 +23,7 @@ def index(request):
             is_personal_record=True
         ).select_related("user", "workout_plan").order_by("-date")[:5],
     }
-    return render(request, "tracker/index.html")
+    return render(request, "tracker/index.html", context=context)
 
 def register(request):
     if request.method == "POST":
