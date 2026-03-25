@@ -140,3 +140,11 @@ def validate_weight(user_weight: float) -> float:
     if user_weight <= 0:
         raise forms.ValidationError("Enter a valid weight.")
     return user_weight
+
+
+class ExerciseSearchForm(forms.Form):
+    exercise = forms.CharField(
+        max_length=50,
+        required=False,
+        label="",
+    )
