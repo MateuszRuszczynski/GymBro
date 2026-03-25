@@ -19,7 +19,7 @@ def index(request):
             "user",
             "workout_plan"
         ).order_by("-date")[:5],
-        "personal_record": WorkoutLog.objects.filter(
+        "personal_records": WorkoutLog.objects.filter(
             is_personal_record=True
         ).select_related("user", "workout_plan").order_by("-date")[:5],
     }

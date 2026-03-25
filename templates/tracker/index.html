@@ -69,6 +69,7 @@
           <table class="table table-hover align-middle mb-0">
             <thead class="table-light">
             <tr>
+              <th>#</th>
               <th>Member</th>
               <th>Plan</th>
               <th>Date</th>
@@ -79,6 +80,7 @@
             {% for log in recent_logs %}
               <tr onclick="window.location='{% url 'tracker:workout-log-detail' pk=log.pk %}'"
                   class="cursor-pointer">
+                <td class="small">{{ forloop.counter }}</td>
                 <td class="small">{{ log.user.get_full_name }}</td>
                 <td class="small">{{ log.workout_plan.name }}</td>
                 <td class="small">{{ log.date|date:"d M Y" }}</td>
@@ -106,6 +108,7 @@
           <table class="table table-hover align-middle mb-0">
             <thead class="table-light">
             <tr>
+              <th>#</th>
               <th>Member</th>
               <th>Plan</th>
               <th>Date</th>
@@ -115,6 +118,7 @@
             {% for log in personal_records %}
               <tr onclick="window.location='{% url 'tracker:workout-log-detail' pk=log.pk %}'"
                   class="cursor-pointer">
+                <td class="small">{{ forloop.counter }}</td>
                 <td class="small">{{ log.user.get_full_name }}</td>
                 <td class="small">{{ log.workout_plan.name }}</td>
                 <td class="small">{{ log.date|date:"d M Y" }}</td>
