@@ -44,6 +44,7 @@ def register(request):
 class ExerciseListView(LoginRequiredMixin, ListView):
     model = Exercise
     context_object_name = "exercises"
+    paginate_by = 3
 
     def get_queryset(self):
         queryset = Exercise.objects.select_related("muscle_group")
