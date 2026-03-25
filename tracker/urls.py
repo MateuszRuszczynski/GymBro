@@ -6,6 +6,7 @@ app_name = "tracker"
 
 urlpatterns = [
     path("", views.index, name="index"),
+    path("register/", views.register, name="register"),
     path("exercises/", views.ExerciseListView.as_view(), name="exercise-list"),
     path("exercises/create/", views.ExerciseCreateView.as_view(), name="exercise-create"),
     path("exercises/<int:pk>/", views.ExerciseDetailView.as_view(), name="exercise-detail"),
