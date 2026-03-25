@@ -1,0 +1,50 @@
+{% if is_paginated %}
+  <nav aria-label="Page navigation" class="my-4">
+    <ul class="pagination justify-content-center">
+
+      {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a class="page-link shadow-sm border-0 rounded-start-pill px-3"
+             href="?page=
+                 {{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">
+            &laquo; Previous
+          </a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <span class="page-link border-0 rounded-start-pill px-3 text-muted">&laquo; Previous</span>
+        </li>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <li class="page-item active">
+            <span class="page-link shadow-sm border-0">{{ num }}</span>
+          </li>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <li class="page-item">
+            <a class="page-link border-0"
+               href="?page=
+                   {{ num }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">
+              {{ num }}
+            </a>
+          </li>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link shadow-sm border-0 rounded-end-pill px-3"
+             href="?page=
+                 {{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">
+            Next &raquo;
+          </a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <span class="page-link border-0 rounded-end-pill px-3 text-muted">Next &raquo;</span>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endif %}
