@@ -1,9 +1,10 @@
+from django.db.models import Q
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from tracker.forms import ExerciseForm, WorkoutPlanForm, GymUserCreationForm, GymUserUpdateForm, WorkoutLogForm, \
-    MuscleGroupForm
+    MuscleGroupForm, ExerciseSearchForm
 from tracker.models import Exercise, MuscleGroup, GymUser, WorkoutLog, WorkoutPlan
 
 
@@ -14,7 +15,16 @@ def index(request):
 class ExerciseListView(ListView):
     model = Exercise
     context_object_name = "exercises"
-    queryset = Exercise.objects.select_related("muscle_group")
+
+    def get_queryset(self):
+        queryset = Exercise.objects.select_related("muscle_group")
+        exercise_search = self.request.GET.get("exercise")
+        if exercise_search:
+            return queryset.filter(
+                Q(name__icontains=exercise_search) |
+                Q(muscle_group__name__icontains=exercise_search)
+            )
+        return queryset
 
 
 class ExerciseDetailView(DetailView):
@@ -168,7 +178,7 @@ class WorkoutPlanCreateView(CreateView):
 class WorkoutPlanUpdateView(UpdateView):
     model = WorkoutPlan
     context_object_name = "workout_plan"
-    fields = "__all__"
+    form_class = WorkoutPlanForm
     success_url = reverse_lazy("tracker:workout-plan-list")
 
 
