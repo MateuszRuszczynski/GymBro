@@ -46,7 +46,7 @@
           <th scope="col">Muscle Group</th>
           <th scope="col">Equipment</th>
           <th scope="col">Difficulty</th>
-          <th scope="col">Edit / Delete</th>
+          <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -74,14 +74,16 @@
               {% endif %}
             </td>
             <td>
-              <a href="{% url 'tracker:exercise-update' pk=exercise.pk %}"
-                 class="btn btn-secondary btn-sm">
-                Edit
-              </a>
-              <a href="{% url 'tracker:exercise-delete' pk=exercise.pk %}"
-                 class="btn btn-danger btn-sm">
-                Delete
-              </a>
+              <div class="d-flex justify-content-center gap-2">
+                <a href="{% url 'tracker:exercise-update' pk=exercise.pk %}"
+                   class="btn btn-primary btn-sm rounded-pill btn-table- px-3">
+                  Edit
+                </a>
+                <a href="{% url 'tracker:exercise-delete' pk=exercise.pk %}"
+                   class="btn btn-danger btn-sm rounded-pill btn-table-action px-3">
+                  Delete
+                </a>
+              </div>
             </td>
           </tr>
         {% empty %}
