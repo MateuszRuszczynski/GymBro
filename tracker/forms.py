@@ -42,26 +42,6 @@ class ExerciseForm(forms.ModelForm):
 class GymUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
-        fields = UserCreationForm.Meta.fields + (
-            "first_name",
-            "last_name",
-            "email",
-            "bio",
-            "height",
-            "weight",
-            "date_of_birth",
-            "membership_type"
-        )
-        widgets = {
-            "bio": forms.Textarea(attrs={"rows": 3}),
-            "date_of_birth": forms.DateInput(attrs={"type": "date"}),
-        }
-
-    def clean_height(self):
-        return validate_height(self.cleaned_data["height"])
-
-    def clean_weight(self):
-        return validate_weight(self.cleaned_data["weight"])
 
 
 class GymUserUpdateForm(forms.ModelForm):
@@ -84,10 +64,16 @@ class GymUserUpdateForm(forms.ModelForm):
         }
 
     def clean_height(self):
-        return validate_height(self.cleaned_data["height"])
+        user_height = self.cleaned_data["height"]
+        if user_height <= 0:
+            raise forms.ValidationError("Enter a valid height.")
+        return user_height
 
     def clean_weight(self):
-        return validate_weight(self.cleaned_data["weight"])
+        user_weight = self.cleaned_data["weight"]
+        if user_weight <= 0:
+            raise forms.ValidationError("Enter a valid weight.")
+        return user_weight
 
 
 class WorkoutPlanForm(forms.ModelForm):
@@ -130,20 +116,16 @@ class WorkoutLogForm(forms.ModelForm):
         return duration
 
 
-def validate_height(user_height: float) -> float:
-    if user_height <= 0:
-        raise forms.ValidationError("Enter a valid height.")
-    return user_height
-
-
-def validate_weight(user_weight: float) -> float:
-    if user_weight <= 0:
-        raise forms.ValidationError("Enter a valid weight.")
-    return user_weight
-
-
 class ExerciseSearchForm(forms.Form):
     exercise = forms.CharField(
+        max_length=50,
+        required=False,
+        label="",
+    )
+
+
+class GymUserSearchForm(forms.Form):
+    gym_user = forms.CharField(
         max_length=50,
         required=False,
         label="",
