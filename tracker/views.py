@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
@@ -44,7 +44,7 @@ def register(request):
 class ExerciseListView(LoginRequiredMixin, ListView):
     model = Exercise
     context_object_name = "exercises"
-    paginate_by = 3
+    paginate_by = 5
 
     def get_queryset(self):
         queryset = Exercise.objects.select_related("muscle_group")
@@ -124,21 +124,21 @@ class GymUserDetailView(LoginRequiredMixin, DetailView):
     context_object_name = "gym_user"
 
 
-class GymUserCreateView(LoginRequiredMixin, CreateView):
+class GymUserCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = GymUser
     context_object_name = "gym_user"
     form_class = GymUserCreationForm
     success_url = reverse_lazy("tracker:gym-user-list")
 
 
-class GymUserUpdateView(LoginRequiredMixin, UpdateView):
+class GymUserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = GymUser
     context_object_name = "gym_user"
     form_class = GymUserUpdateForm
     success_url = reverse_lazy("tracker:gym-user-list")
 
 
-class GymUserDeleteView(LoginRequiredMixin, DeleteView):
+class GymUserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = GymUser
     context_object_name = "gym_user"
     success_url = reverse_lazy("tracker:gym-user-list")
