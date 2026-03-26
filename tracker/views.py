@@ -117,6 +117,7 @@ class GymUserListView(LoginRequiredMixin, ListView):
     model = GymUser
     context_object_name = "gym_users"
     ordering = ["username"]
+    paginate_by = 5
 
 
 class GymUserDetailView(LoginRequiredMixin, DetailView):
@@ -130,6 +131,9 @@ class GymUserCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     form_class = GymUserCreationForm
     success_url = reverse_lazy("tracker:gym-user-list")
 
+    def test_func(self):
+        return self.request.user.is_staff
+
 
 class GymUserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = GymUser
@@ -137,11 +141,17 @@ class GymUserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     form_class = GymUserUpdateForm
     success_url = reverse_lazy("tracker:gym-user-list")
 
+    def test_func(self):
+        return self.request.user.is_staff
+
 
 class GymUserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = GymUser
     context_object_name = "gym_user"
     success_url = reverse_lazy("tracker:gym-user-list")
+
+    def test_func(self):
+        return self.request.user.is_staff
 
 
 class WorkoutLogListView(LoginRequiredMixin, ListView):

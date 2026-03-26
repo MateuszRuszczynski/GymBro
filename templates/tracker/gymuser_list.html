@@ -30,39 +30,45 @@
         </tr>
         </thead>
         <tbody>
-        {% for user in gym_users %}
+        {% for gym_user in gym_users %}
           <tr onclick="window.location='{% url 'tracker:gym-user-detail' pk=user.pk %}'"
               class="clickable-row">
             <td class="text-muted small">{{ forloop.counter }}</td>
             <td>
-              <div class="fw-semibold">{{ user.get_full_name }}</div>
-              <div class="text-muted small">{{ user.bio|truncatewords:6 }}</div>
+              <div class="fw-semibold">
+                {{ gym_user.get_full_name }}
+                {% if user == gym_user %}
+                  <div class="spinner-grow spinner-grow-sm text-success" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                {% endif %}</div>
+              <div class="text-muted small">{{ gym_user.bio|truncatewords:6 }}</div>
             </td>
-            <td class="text-muted small">@{{ user.username }}</td>
+            <td class="text-muted small">@{{ gym_user.username }}</td>
             <td>
-              {% if user.membership_type == "premium" %}
+              {% if gym_user.membership_type == "premium" %}
                 <span class="badge bg-warning text-dark">Premium</span>
-              {% elif user.membership_type == "coach" %}
+              {% elif gym_user.membership_type == "coach" %}
                 <span class="badge bg-primary">Coach</span>
               {% else %}
                 <span class="badge bg-secondary">Free</span>
               {% endif %}
             </td>
             <td class="text-muted small">
-              {% if user.weight %}
-                {{ user.weight }}kg
+              {% if gym_user.weight %}
+                {{ gym_user.weight }}kg
               {% else %}
                 —
               {% endif %}
             </td>
             <td class="text-muted small">
-              {% if user.height %}
-                {{ user.height }}cm
+              {% if gym_user.height %}
+                {{ gym_user.height }}cm
               {% else %}
-                —
+                There are no users yet.
               {% endif %}
             </td>
-            <td class="text-muted small">{{ user.date_joined|date:"d M Y" }}</td>
+            <td class="text-muted small">{{ gym_user.date_joined|date:"d M Y" }}</td>
           </tr>
         {% empty %}
           <tr>
@@ -75,4 +81,5 @@
       </table>
     </div>
   </div>
+  {% include 'includes/pagination.html' %}
 {% endblock %}
