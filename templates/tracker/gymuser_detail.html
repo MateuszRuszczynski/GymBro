@@ -71,8 +71,10 @@
           </div>
         </div>
         <div class="card-footer d-flex gap-2">
-          <a href="{% url 'tracker:gym-user-update' pk=gym_user.pk %}" class="btn btn-warning btn-sm">Edit</a>
-          <a href="{% url 'tracker:gym-user-delete' pk=gym_user.pk %}" class="btn btn-danger btn-sm">Delete</a>
+          {% if request.user.is_stuff %}
+            <a href="{% url 'tracker:gym-user-update' pk=gym_user.pk %}" class="btn btn-warning btn-sm">Edit</a>
+            <a href="{% url 'tracker:gym-user-delete' pk=gym_user.pk %}" class="btn btn-danger btn-sm">Delete</a>
+          {% endif %}
           <a href="{% url 'tracker:gym-user-list' %}" class="btn btn-secondary btn-sm ms-auto">Back to list</a>
         </div>
       </div>
