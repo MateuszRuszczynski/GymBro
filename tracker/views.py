@@ -37,7 +37,7 @@ def register(request):
             login(request, user)
             return redirect("/")
     else:
-        form = GymUserUpdateForm()
+        form = GymUserCreationForm()
     return render(request, "registration/register.html", {"form": form})
 
 
@@ -118,6 +118,17 @@ class GymUserListView(LoginRequiredMixin, ListView):
     context_object_name = "gym_users"
     ordering = ["username"]
     paginate_by = 5
+
+    def get_queryset(self):
+        queryset = GymUser.objects.all()
+        gym_search = self.request.GET.get("gym_user")
+        if gym_search:
+            return queryset.filter(
+                Q(username__icontains=gym_search) |
+                Q(first_name__icontains=gym_search) |
+                Q(last_name__icontains=gym_search)
+            )
+        return queryset
 
 
 class GymUserDetailView(LoginRequiredMixin, DetailView):
