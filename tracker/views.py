@@ -116,7 +116,6 @@ class MuscleGroupDeleteView(LoginRequiredMixin, DeleteView):
 class GymUserListView(LoginRequiredMixin, ListView):
     model = GymUser
     context_object_name = "gym_users"
-    ordering = ["username"]
     paginate_by = 5
 
     def get_queryset(self):
@@ -146,14 +145,11 @@ class GymUserCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         return self.request.user.is_staff
 
 
-class GymUserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class GymUserUpdateView(LoginRequiredMixin, UpdateView):
     model = GymUser
     context_object_name = "gym_user"
     form_class = GymUserUpdateForm
     success_url = reverse_lazy("tracker:gym-user-list")
-
-    def test_func(self):
-        return self.request.user.is_staff
 
 
 class GymUserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
