@@ -5,7 +5,7 @@ from django.test import TestCase
 from tracker.models import MuscleGroup, GymUser, Exercise, WorkoutPlan, WorkoutLog
 
 
-class MuscleGroupTests(TestCase):
+class MuscleGroupModelTests(TestCase):
     def setUp(self):
         self.muscle_group = MuscleGroup.objects.create(name="Legs")
 
@@ -13,7 +13,7 @@ class MuscleGroupTests(TestCase):
         self.assertEqual(str(self.muscle_group), "Legs")
 
 
-class GymUserTests(TestCase):
+class GymUserModelTests(TestCase):
     def setUp(self):
         self.gym_user = GymUser.objects.create_user(
             username="Marco_body_builder",
@@ -38,7 +38,7 @@ class GymUserTests(TestCase):
         self.assertIn(self.gym_user.membership_type, valid_choices)
 
 
-class ExerciseTests(TestCase):
+class ExerciseModelTests(TestCase):
     def setUp(self):
         self.muscle_group = MuscleGroup.objects.create(name="Biceps")
         self.exercise = Exercise.objects.create(
@@ -60,7 +60,7 @@ class ExerciseTests(TestCase):
         self.assertIn(self.exercise.difficulty, valid_choices)
 
 
-class WorkoutPlanTest(TestCase):
+class WorkoutPlanModelTest(TestCase):
     def setUp(self):
         self.user = GymUser.objects.create_user(
             username="Willy",
@@ -90,37 +90,7 @@ class WorkoutPlanTest(TestCase):
         self.assertEqual(self.plan.created_by.username, "Willy")
 
 
-class WorkoutPlanModelTest(TestCase):
-    def setUp(self):
-        self.user = GymUser.objects.create_user(
-            username="testuser",
-            password="testpass123",
-        )
-        self.muscle_group = MuscleGroup.objects.create(name="Legs")
-        self.exercise = Exercise.objects.create(
-            name="Squat",
-            difficulty="intermediate",
-            equipment="Barbell",
-            muscle_group=self.muscle_group,
-        )
-        self.plan = WorkoutPlan.objects.create(
-            name="Leg Day",
-            goal="strength",
-            created_by=self.user,
-        )
-        self.plan.exercises.add(self.exercise)
-
-    def test_str(self):
-        self.assertEqual(str(self.plan), "Leg Day")
-
-    def test_exercises_relationship(self):
-        self.assertIn(self.exercise, self.plan.exercises.all())
-
-    def test_created_by_relationship(self):
-        self.assertEqual(self.plan.created_by.username, "testuser")
-
-
-class WorkoutLogTest(TestCase):
+class WorkoutLogModelTest(TestCase):
     def setUp(self):
         self.user = GymUser.objects.create_user(
             username="Andrew",
