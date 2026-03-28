@@ -93,7 +93,7 @@
               {% endif %}
             </td>
             <td class="text-muted small">{{ gym_user.date_joined|date:"d M Y" }}</td>
-            {% if user == gym_user %}
+            {% if not request.user.is_staff and request.user == gym_user %}
               <td class="text-center align-middle">
                 <a href="{% url 'tracker:gym-user-update' pk=gym_user.pk %}"
                    class="btn btn-primary btn-sm rounded-pill shadow-sm btn-table-action px-3 py-1">
