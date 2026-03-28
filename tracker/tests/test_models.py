@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from tracker.models import MuscleGroup, GymUser, Exercise
+from tracker.models import MuscleGroup, GymUser, Exercise, WorkoutPlan
 
 
 class MuscleGroupTests(TestCase):
@@ -48,7 +48,7 @@ class ExerciseTests(TestCase):
         )
 
     def test_str(self):
-        self.assertEqual(str(self.exercise.name), "Leg press")
+        self.assertEqual(str(self.exercise), "Leg press")
 
     def test_muscle_group_relationship(self):
         self.assertEqual(str(self.muscle_group.name), "Biceps")
@@ -56,3 +56,33 @@ class ExerciseTests(TestCase):
     def test_difficulty_choices(self):
         valid_choices = ["beginner", "intermediate", "advanced"]
         self.assertIn(self.exercise.difficulty, valid_choices)
+
+
+class WorkoutPlanModelTest(TestCase):
+    def setUp(self):
+        self.user = GymUser.objects.create_user(
+            username="Willy",
+            password="testpass123",
+        )
+        self.muscle_group = MuscleGroup.objects.create(name="Legs")
+        self.exercise = Exercise.objects.create(
+            name="Squat",
+            difficulty="intermediate",
+            equipment="Barbell",
+            muscle_group=self.muscle_group,
+        )
+        self.plan = WorkoutPlan.objects.create(
+            name="Leg Day",
+            goal="strength",
+            created_by=self.user,
+        )
+        self.plan.exercises.add(self.exercise)
+
+    def test_str(self):
+        self.assertEqual(str(self.plan), "Leg Day")
+
+    def test_exercises_relationship(self):
+        self.assertIn(self.exercise, self.plan.exercises.all())
+
+    def test_created_by_relationship(self):
+        self.assertEqual(self.plan.created_by.username, "Willy")
