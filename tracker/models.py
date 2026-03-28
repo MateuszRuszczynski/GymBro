@@ -18,9 +18,9 @@ MEMBERSHIP_CHOICES = [
 
 
 class GymUser(AbstractUser):
-    bio = models.TextField(max_length=250, blank=True)
-    height = models.DecimalField(max_digits=4, decimal_places=1)
-    weight = models.DecimalField(max_digits=4, decimal_places=1)
+    bio = models.TextField(max_length=250, blank=True, null=True)
+    height = models.DecimalField(max_digits=4, decimal_places=1, blank=True, null=True)
+    weight = models.DecimalField(max_digits=4, decimal_places=1, blank=True, null=True)
     date_of_birth = models.DateField(blank=True, null=True)
     membership_type = models.CharField(max_length=20, choices=MEMBERSHIP_CHOICES, default="free")
 
