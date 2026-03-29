@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from datetime import date
 
-from tracker.models import Exercise, WorkoutPlan, WorkoutLog, MuscleGroup
+from tracker.models import Exercise, WorkoutLog, MuscleGroup, WorkoutPlan
 
 
 class MuscleGroupForm(forms.ModelForm):
@@ -85,17 +85,10 @@ class GymUserUpdateForm(forms.ModelForm):
 class WorkoutPlanForm(forms.ModelForm):
     class Meta:
         model = WorkoutPlan
-        fields = ["name", "description", "created_by", "exercises", "goal"]
+        fields = ["name", "description", "exercises", "goal"]
         widgets = {
-            "description": forms.Textarea(attrs={"rows": 3}),
-            "exercises": forms.CheckboxSelectMultiple(),
+            "exercises": forms.CheckboxSelectMultiple()
         }
-
-    def clean_exercises(self):
-        exercises = self.cleaned_data["exercises"]
-        if len(exercises) < 1:
-            raise forms.ValidationError("The workout plan must have at least one exercise.")
-        return exercises
 
 
 class WorkoutLogForm(forms.ModelForm):
