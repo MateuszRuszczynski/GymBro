@@ -65,14 +65,20 @@ class GymUserUpdateForm(forms.ModelForm):
 
     def clean_height(self):
         user_height = self.cleaned_data["height"]
-        if user_height <= 0:
-            raise forms.ValidationError("Enter a valid height.")
+        if user_height is not None:
+            if user_height < 0:
+                raise forms.ValidationError("Enter a valid height.")
+            if user_height > 400:
+                raise forms.ValidationError("Enter a realistic height.")
         return user_height
 
     def clean_weight(self):
         user_weight = self.cleaned_data["weight"]
-        if user_weight <= 0:
-            raise forms.ValidationError("Enter a valid weight.")
+        if user_weight is not None:
+            if user_weight < 0:
+                raise forms.ValidationError("Enter a valid weight.")
+            if user_weight > 600:
+                raise forms.ValidationError("Enter a realistic weight.")
         return user_weight
 
 
