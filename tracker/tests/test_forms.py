@@ -1,6 +1,8 @@
+from datetime import date, timedelta
+
 from django.test import TestCase
 
-from tracker.forms import MuscleGroupForm, ExerciseForm, GymUserUpdateForm, WorkoutPlanForm
+from tracker.forms import MuscleGroupForm, ExerciseForm, GymUserUpdateForm, WorkoutPlanForm, WorkoutLogForm
 from tracker.models import MuscleGroup, Exercise, GymUser, WorkoutPlan
 
 
@@ -160,4 +162,75 @@ class WorkoutPlanFormTest(TestCase):
         data = self.valid_data.copy()
         data["exercises"] = [second_exercise.pk, self.exercise.pk]
         form = WorkoutPlanForm(data=data)
+        self.assertTrue(form.is_valid())
+
+
+class WorkoutLogFormTest(TestCase):
+    def setUp(self):
+        self.user = GymUser.objects.create_user(
+            username="testuser",
+            password="testpass123",
+        )
+        self.muscle_group = MuscleGroup.objects.create(name="Chest")
+        self.exercise = Exercise.objects.create(
+            name="Bench Press",
+            difficulty="intermediate",
+            equipment="Barbell",
+            muscle_group=self.muscle_group,
+        )
+        self.plan = WorkoutPlan.objects.create(
+            name="Push Day",
+            goal="strength",
+            created_by=self.user,
+        )
+        self.valid_data = {
+            "workout_plan": self.plan.pk,
+            "date": date.today().strftime("%Y-%m-%d"),
+            "duration_minutes": 60,
+            "notes": "",
+            "is_personal_record": False,
+        }
+
+    def test_valid_data_passes(self):
+        form = WorkoutLogForm(data=self.valid_data)
+        self.assertTrue(form.is_valid())
+
+    def test_future_date_fails(self):
+        data = self.valid_data.copy()
+        data["date"] = (date.today() + timedelta(days=1)).strftime("%Y-%m-%d")
+        form = WorkoutLogForm(data=data)
+        self.assertFalse(form.is_valid())
+        self.assertIn("date", form.errors)
+
+    def test_past_date_is_valid(self):
+        data = self.valid_data.copy()
+        data["date"] = (date.today() - timedelta(days=7)).strftime("%Y-%m-%d")
+        form = WorkoutLogForm(data=data)
+        self.assertTrue(form.is_valid())
+
+    def test_negative_duration_fails(self):
+        data = self.valid_data.copy()
+        data["duration_minutes"] = -10
+        form = WorkoutLogForm(data=data)
+        self.assertFalse(form.is_valid())
+        self.assertIn("duration_minutes", form.errors)
+
+    def test_zero_duration_fails(self):
+        data = self.valid_data.copy()
+        data["duration_minutes"] = 0
+        form = WorkoutLogForm(data=data)
+        self.assertFalse(form.is_valid())
+        self.assertIn("duration_minutes", form.errors)
+
+    def test_duration_over_300_fails(self):
+        data = self.valid_data.copy()
+        data["duration_minutes"] = 301
+        form = WorkoutLogForm(data=data)
+        self.assertFalse(form.is_valid())
+        self.assertIn("duration_minutes", form.errors)
+
+    def test_duration_exactly_300_is_valid(self):
+        data = self.valid_data.copy()
+        data["duration_minutes"] = 300
+        form = WorkoutLogForm(data=data)
         self.assertTrue(form.is_valid())

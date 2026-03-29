@@ -18,7 +18,7 @@ MEMBERSHIP_CHOICES = [
 
 
 class GymUser(AbstractUser):
-    bio = models.TextField(max_length=250, blank=True, null=True)
+    bio = models.TextField(max_length=250, blank=True)
     height = models.DecimalField(max_digits=4, decimal_places=1, blank=True, null=True)
     weight = models.DecimalField(max_digits=4, decimal_places=1, blank=True, null=True)
     date_of_birth = models.DateField(blank=True, null=True)
@@ -37,7 +37,7 @@ DIFFICULTY_CHOICES = [
 
 class Exercise(models.Model):
     name = models.CharField(max_length=100)
-    description = models.TextField(max_length=200, blank=True, null=True)
+    description = models.TextField(max_length=200, blank=True)
     difficulty = models.CharField(max_length=20, choices=DIFFICULTY_CHOICES)
     equipment = models.CharField(max_length=100)
     muscle_group = models.ForeignKey(MuscleGroup, on_delete=models.CASCADE)
@@ -56,7 +56,7 @@ STATUS_CHOICES = [
 
 class WorkoutPlan(models.Model):
     name = models.CharField(max_length=100)
-    description = models.TextField(max_length=200, blank=True, null=True)
+    description = models.TextField(max_length=200, blank=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     exercises = models.ManyToManyField(Exercise, related_name="workout_plans")
     goal = models.CharField(max_length=20, choices=STATUS_CHOICES)
