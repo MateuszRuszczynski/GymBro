@@ -145,11 +145,14 @@ class GymUserCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         return self.request.user.is_staff
 
 
-class GymUserUpdateView(LoginRequiredMixin, UpdateView):
+class GymUserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = GymUser
     context_object_name = "gym_user"
     form_class = GymUserUpdateForm
     success_url = reverse_lazy("tracker:gym-user-list")
+
+    def test_func(self):
+        return self.request.user.is_staff
 
 
 class GymUserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
