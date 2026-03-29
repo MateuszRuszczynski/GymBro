@@ -1,7 +1,7 @@
 from django.test import TestCase
 
-from tracker.forms import MuscleGroupForm, ExerciseForm, GymUserUpdateForm
-from tracker.models import MuscleGroup
+from tracker.forms import MuscleGroupForm, ExerciseForm, GymUserUpdateForm, WorkoutPlanForm
+from tracker.models import MuscleGroup, Exercise, GymUser, WorkoutPlan
 
 
 class MuscleGroupFormTest(TestCase):
@@ -134,3 +134,30 @@ class GymUserUpdateFormTest(TestCase):
         self.assertTrue(form.is_valid())
 
 
+class WorkoutPlanFormTest(TestCase):
+    def setUp(self):
+        self.muscle_group = MuscleGroup.objects.create(name="Legs")
+        self.exercise = Exercise.objects.create(
+            name="Squat",
+            description="The best legs exercise",
+            difficulty="intermediate",
+            muscle_group=self.muscle_group
+        )
+        self.valid_data = {
+            "name": "Power",
+            "description": "",
+            "exercises": self.exercise.pk,
+            "goal": "strength"
+        }
+
+    def test_multiple_exercises_valid(self):
+        second_exercise = Exercise.objects.create(
+            name="Leg press",
+            description="The best legs exercise",
+            difficulty="intermediate",
+            muscle_group=self.muscle_group
+        )
+        data = self.valid_data.copy()
+        data["exercises"] = [second_exercise.pk, self.exercise.pk]
+        form = WorkoutPlanForm(data=data)
+        self.assertTrue(form.is_valid())

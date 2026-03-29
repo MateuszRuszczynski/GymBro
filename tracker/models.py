@@ -36,10 +36,10 @@ DIFFICULTY_CHOICES = [
 
 
 class Exercise(models.Model):
-    name = models.CharField(max_length=100, blank=False)
-    description = models.TextField(max_length=200, blank=True)
+    name = models.CharField(max_length=100)
+    description = models.TextField(max_length=200, blank=True, null=True)
     difficulty = models.CharField(max_length=20, choices=DIFFICULTY_CHOICES)
-    equipment = models.CharField(max_length=100, blank=False)
+    equipment = models.CharField(max_length=100)
     muscle_group = models.ForeignKey(MuscleGroup, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -56,9 +56,9 @@ STATUS_CHOICES = [
 
 class WorkoutPlan(models.Model):
     name = models.CharField(max_length=100)
-    description = models.TextField(max_length=200, blank=True)
+    description = models.TextField(max_length=200, blank=True, null=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    exercises = models.ManyToManyField(Exercise, related_name="workout_plans", blank=True)
+    exercises = models.ManyToManyField(Exercise, related_name="workout_plans")
     goal = models.CharField(max_length=20, choices=STATUS_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
 
