@@ -1,4 +1,4 @@
 {% extends "includes/base_confirm_delete.html" %}
 
 {% block object_name %}{{ workout_log.workout_plan }}{% endblock %}
-{% block cancel_url %}{% url 'tracker:workout-log-list' %}{% endblock %}
+{% block cancel_url %}{% url 'tracker:workout-log-detail' pk=workout_log.pk %}{% endblock %}
