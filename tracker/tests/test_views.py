@@ -25,6 +25,68 @@ class PublicAccessTest(TestCase):
         )
 
 
+class MuscleGroupViewTest(TestCase):
+    def setUp(self):
+        self.user = GymUser.objects.create_user(
+            username="testuser",
+            password="testpass123",
+        )
+        self.client.login(username="testuser", password="testpass123")
+        self.muscle_group = MuscleGroup.objects.create(name="Chest")
+
+    def test_list_page_loads(self):
+        response = self.client.get(reverse("tracker:muscle-group-list"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "tracker/musclegroup_list.html")
+        self.assertContains(response, "Chest")
+
+    def test_list_redirects_if_not_logged_in(self):
+        self.client.logout()
+        response = self.client.get(reverse("tracker:muscle-group-list"))
+        self.assertEqual(response.status_code, 302)
+
+    def test_detail_page_loads(self):
+        response = self.client.get(
+            reverse("tracker:muscle-group-detail", kwargs={"pk": self.muscle_group.pk})
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_detail_correct_template(self):
+        response = self.client.get(
+            reverse("tracker:muscle-group-detail", kwargs={"pk": self.muscle_group.pk})
+        )
+        self.assertTemplateUsed(response, "tracker/musclegroup_detail.html")
+
+    def test_detail_shows_name(self):
+        response = self.client.get(
+            reverse("tracker:muscle-group-detail", kwargs={"pk": self.muscle_group.pk})
+        )
+        self.assertContains(response, "Chest")
+
+    def test_create_redirects_to_list(self):
+        response = self.client.post(
+            reverse("tracker:muscle-group-create"),
+            {"name": "Legs"}
+        )
+        self.assertRedirects(response, reverse("tracker:muscle-group-list"))
+
+    def test_update_changes_name(self):
+        response = self.client.post(
+            reverse("tracker:muscle-group-update", kwargs={"pk": self.muscle_group.pk}),
+            {"name": "Upper Chest"}
+        )
+        self.assertEqual(response.status_code, 302)
+        self.muscle_group.refresh_from_db()
+        self.assertEqual(self.muscle_group.name, "Upper Chest")
+
+    def test_delete_removes_muscle_group(self):
+        response = self.client.post(
+            reverse("tracker:muscle-group-delete", kwargs={"pk": self.muscle_group.pk})
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertFalse(MuscleGroup.objects.filter(pk=self.muscle_group.pk).exists())
+
+
 class ExerciseViewTest(TestCase):
     def setUp(self):
         self.user = GymUser.objects.create_user(
