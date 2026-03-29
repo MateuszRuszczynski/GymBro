@@ -196,6 +196,106 @@ class WorkoutPlanViewTest(TestCase):
         self.assertFalse(WorkoutPlan.objects.filter(pk=self.plan.pk).exists())
 
 
+class GymUserViewTest(TestCase):
+    def setUp(self):
+        self.admin_user = GymUser.objects.create_user(
+            username="admin",
+            password="testpass123",
+            is_staff=True,
+        )
+        self.regular_user = GymUser.objects.create_user(
+            username="regular",
+            password="testpass123",
+        )
+        self.member = GymUser.objects.create_user(
+            username="member",
+            first_name="John",
+            last_name="Doe",
+            password="testpass123",
+            membership_type="premium",
+        )
+        self.client.login(username="admin", password="testpass123")
+
+    def test_list_page_loads(self):
+        response = self.client.get(reverse("tracker:gym-user-list"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "tracker/gymuser_list.html")
+        self.assertContains(response, "member")
+
+    def test_list_redirects_if_not_logged_in(self):
+        self.client.logout()
+        response = self.client.get(reverse("tracker:gym-user-list"))
+        self.assertEqual(response.status_code, 302)
+
+    def test_detail_page_loads(self):
+        response = self.client.get(
+            reverse("tracker:gym-user-detail", kwargs={"pk": self.member.pk})
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_detail_correct_template(self):
+        response = self.client.get(
+            reverse("tracker:gym-user-detail", kwargs={"pk": self.member.pk})
+        )
+        self.assertTemplateUsed(response, "tracker/gymuser_detail.html")
+
+    def test_detail_shows_full_name(self):
+        response = self.client.get(
+            reverse("tracker:gym-user-detail", kwargs={"pk": self.member.pk})
+        )
+        self.assertContains(response, "John Doe")
+
+    def test_regular_user_cannot_access_create(self):
+        self.client.login(username="regular", password="testpass123")
+        response = self.client.get(reverse("tracker:gym-user-create"))
+        self.assertEqual(response.status_code, 403)
+
+    def test_admin_can_access_create(self):
+        response = self.client.get(reverse("tracker:gym-user-create"))
+        self.assertEqual(response.status_code, 200)
+
+    def test_regular_user_cannot_update(self):
+        self.client.login(username="regular", password="testpass123")
+        response = self.client.get(
+            reverse("tracker:gym-user-update", kwargs={"pk": self.member.pk})
+        )
+        self.assertEqual(response.status_code, 403)
+
+    def test_admin_can_update(self):
+        response = self.client.post(
+            reverse("tracker:gym-user-update", kwargs={"pk": self.member.pk}),
+            {
+                "username": "member",
+                "first_name": "John",
+                "last_name": "Updated",
+                "email": "",
+                "bio": "",
+                "height": "170",
+                "weight": "80",
+                "date_of_birth": "",
+                "membership_type": "premium",
+            }
+        )
+        self.assertEqual(response.status_code, 302)
+        self.member.refresh_from_db()
+        self.assertEqual(self.member.last_name, "Updated")
+
+    def test_regular_user_cannot_delete(self):
+        self.client.login(username="regular", password="testpass123")
+        response = self.client.post(
+            reverse("tracker:gym-user-delete", kwargs={"pk": self.member.pk})
+        )
+        self.assertEqual(response.status_code, 403)
+        self.assertTrue(GymUser.objects.filter(pk=self.member.pk).exists())
+
+    def test_admin_can_delete(self):
+        response = self.client.post(
+            reverse("tracker:gym-user-delete", kwargs={"pk": self.member.pk})
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertFalse(GymUser.objects.filter(pk=self.member.pk).exists())
+
+
 class WorkoutLogViewTest(TestCase):
     def setUp(self):
         self.user = GymUser.objects.create_user(
