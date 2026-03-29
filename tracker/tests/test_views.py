@@ -95,6 +95,107 @@ class ExerciseViewTest(TestCase):
         self.assertFalse(Exercise.objects.filter(pk=self.exercise.pk).exists())
 
 
+class WorkoutPlanViewTest(TestCase):
+    def setUp(self):
+        self.user = GymUser.objects.create_user(
+            username="testuser",
+            password="testpass123",
+        )
+        self.client.login(username="testuser", password="testpass123")
+        self.muscle_group = MuscleGroup.objects.create(name="Chest")
+        self.exercise = Exercise.objects.create(
+            name="Bench Press",
+            difficulty="intermediate",
+            equipment="Barbell",
+            muscle_group=self.muscle_group,
+        )
+        self.plan = WorkoutPlan.objects.create(
+            name="Push Day",
+            goal="strength",
+            created_by=self.user,
+        )
+        self.plan.exercises.add(self.exercise)
+
+    def test_list_page_loads(self):
+        response = self.client.get(reverse("tracker:workout-plan-list"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "tracker/workoutplan_list.html")
+        self.assertContains(response, "Push Day")
+
+    def test_list_redirects_if_not_logged_in(self):
+        self.client.logout()
+        response = self.client.get(reverse("tracker:workout-plan-list"))
+        self.assertEqual(response.status_code, 302)
+
+    def test_detail_page_loads(self):
+        response = self.client.get(
+            reverse("tracker:workout-plan-detail", kwargs={"pk": self.plan.pk})
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_detail_correct_template(self):
+        response = self.client.get(
+            reverse("tracker:workout-plan-detail", kwargs={"pk": self.plan.pk})
+        )
+        self.assertTemplateUsed(response, "tracker/workoutplan_detail.html")
+
+    def test_detail_shows_plan_name(self):
+        response = self.client.get(
+            reverse("tracker:workout-plan-detail", kwargs={"pk": self.plan.pk})
+        )
+        self.assertContains(response, "Push Day")
+
+    def test_detail_shows_exercises(self):
+        response = self.client.get(
+            reverse("tracker:workout-plan-detail", kwargs={"pk": self.plan.pk})
+        )
+        self.assertContains(response, "Bench Press")
+
+    def test_create_valid_data(self):
+        response = self.client.post(
+            reverse("tracker:workout-plan-create"),
+            {
+                "name": "Pull Day",
+                "description": "Back and biceps.",
+                "goal": "hypertrophy",
+                "exercises": [self.exercise.pk],
+            }
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(WorkoutPlan.objects.filter(name="Pull Day").exists())
+
+    def test_create_redirects_to_list(self):
+        response = self.client.post(
+            reverse("tracker:workout-plan-create"),
+            {
+                "name": "Leg Day",
+                "goal": "strength",
+                "exercises": [self.exercise.pk],
+            }
+        )
+        self.assertRedirects(response, reverse("tracker:workout-plan-list"))
+
+    def test_update_changes_name(self):
+        response = self.client.post(
+            reverse("tracker:workout-plan-update", kwargs={"pk": self.plan.pk}),
+            {
+                "name": "Push Day Updated",
+                "goal": "strength",
+                "exercises": [self.exercise.pk],
+            }
+        )
+        self.assertEqual(response.status_code, 302)
+        self.plan.refresh_from_db()
+        self.assertEqual(self.plan.name, "Push Day Updated")
+
+    def test_delete_removes_plan(self):
+        response = self.client.post(
+            reverse("tracker:workout-plan-delete", kwargs={"pk": self.plan.pk})
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertFalse(WorkoutPlan.objects.filter(pk=self.plan.pk).exists())
+
+
 class WorkoutLogViewTest(TestCase):
     def setUp(self):
         self.user = GymUser.objects.create_user(
