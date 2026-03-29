@@ -6,8 +6,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from tracker.forms import ExerciseForm, WorkoutPlanForm, GymUserCreationForm, GymUserUpdateForm, WorkoutLogForm, \
-    MuscleGroupForm
+from tracker.forms import ExerciseForm, GymUserCreationForm, GymUserUpdateForm, WorkoutLogForm, \
+    MuscleGroupForm, WorkoutPlanForm
 from tracker.models import Exercise, MuscleGroup, GymUser, WorkoutLog, WorkoutPlan
 
 
@@ -227,6 +227,10 @@ class WorkoutPlanCreateView(LoginRequiredMixin, CreateView):
     context_object_name = "workout_plan"
     form_class = WorkoutPlanForm
     success_url = reverse_lazy("tracker:workout-plan-list")
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
 
 
 class WorkoutPlanUpdateView(LoginRequiredMixin, UpdateView):
