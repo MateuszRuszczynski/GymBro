@@ -185,6 +185,10 @@ class WorkoutLogCreateView(LoginRequiredMixin, CreateView):
     form_class = WorkoutLogForm
     success_url = reverse_lazy("tracker:workout-log-list")
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
 
 class WorkoutLogUpdateView(LoginRequiredMixin, UpdateView):
     model = WorkoutLog
