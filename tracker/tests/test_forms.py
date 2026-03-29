@@ -3,7 +3,7 @@ from datetime import date, timedelta
 from django.test import TestCase
 
 from tracker.forms import MuscleGroupForm, ExerciseForm, GymUserUpdateForm, WorkoutPlanForm, WorkoutLogForm, \
-    ExerciseSearchForm
+    ExerciseSearchForm, GymUserSearchForm
 from tracker.models import MuscleGroup, Exercise, GymUser, WorkoutPlan
 
 
@@ -255,3 +255,41 @@ class ExerciseSearchFormTest(TestCase):
         form = ExerciseSearchForm(data={"exercise": "x" * 50})
         self.assertTrue(form.is_valid())
 
+
+class ExerciseSearchFormTest(TestCase):
+
+    def test_empty_search_is_valid(self):
+        form = ExerciseSearchForm(data={"exercise": ""})
+        self.assertTrue(form.is_valid())
+
+    def test_valid_search_term(self):
+        form = ExerciseSearchForm(data={"exercise": "Bench Press"})
+        self.assertTrue(form.is_valid())
+
+    def test_search_term_too_long(self):
+        form = ExerciseSearchForm(data={"exercise": "x" * 51})
+        self.assertFalse(form.is_valid())
+        self.assertIn("exercise", form.errors)
+
+    def test_search_term_exactly_50_chars_is_valid(self):
+        form = ExerciseSearchForm(data={"exercise": "x" * 50})
+        self.assertTrue(form.is_valid())
+
+
+class GymUserSearchFormTest(TestCase):
+    def test_empty_search_is_valid(self):
+        form = GymUserSearchForm(data={"gym_user": ""})
+        self.assertTrue(form.is_valid())
+
+    def test_valid_search_term(self):
+        form = GymUserSearchForm(data={"gym_user": "John"})
+        self.assertTrue(form.is_valid())
+
+    def test_search_term_too_long(self):
+        form = GymUserSearchForm(data={"gym_user": "x" * 51})
+        self.assertFalse(form.is_valid())
+        self.assertIn("gym_user", form.errors)
+
+    def test_search_term_exactly_50_chars_is_valid(self):
+        form = GymUserSearchForm(data={"gym_user": "x" * 50})
+        self.assertTrue(form.is_valid())
