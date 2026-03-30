@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 
-{% block title %}Workout Logs{% endblock %}
+{% block title %}Training seassions{% endblock %}
 
 {% block content %}
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="fw-bold">Workout Logs</h2>
-    <a href="{% url 'tracker:workout-log-create' %}" class="btn btn-dark">
-      + Add workout log
+    <h2 class="fw-bold">Training seassions</h2>
+    <a href="{% url 'tracker:workout-log-create' %}"
+       class="btn btn-dark rounded-pill px-4 py-2 fw-bold shadow-sm hover-lift">
+      Add training session
     </a>
   </div>
 

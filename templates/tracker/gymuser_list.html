@@ -9,8 +9,9 @@
       <p class="text-muted small mb-0">{{ gym_users|length }} members total</p>
     </div>
     {% if request.user.is_staff %}
-      <a href="{% url 'tracker:gym-user-create' %}" class="btn btn-dark">
-        + Add user
+      <a href="{% url 'tracker:gym-user-create' %}"
+         class="btn btn-dark rounded-pill px-4 py-2 fw-bold shadow-sm hover-lift">
+        Add user
       </a>
     {% endif %}
   </div>

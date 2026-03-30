@@ -9,8 +9,9 @@
       <h2 class="fw-bold mb-0">Exercise Library</h2>
       <p class="text-muted small mb-0">{{ exercises|length }} exercises total</p>
     </div>
-    <a href="{% url 'tracker:exercise-create' %}" class="btn btn-dark">
-      + Add Exercise
+    <a href="{% url 'tracker:exercise-create' %}"
+       class="btn btn-dark rounded-pill px-4 py-2 fw-bold shadow-sm hover-lift">
+      Add Exercise
     </a>
   </div>
   <form method="GET" action="{% url 'tracker:exercise-list' %}" class="mb-4">
