@@ -178,6 +178,7 @@ class GymUserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class WorkoutLogListView(LoginRequiredMixin, ListView):
     model = WorkoutLog
     context_object_name = "workout_logs"
+    paginate_by = 6
     queryset = WorkoutLog.objects.select_related(
         "user",
         "workout_plan",
@@ -219,6 +220,7 @@ class WorkoutLogDeleteView(LoginRequiredMixin, DeleteView):
 
 class WorkoutPlanListView(LoginRequiredMixin, ListView):
     model = WorkoutPlan
+    paginate_by = 6
     context_object_name = "workout_plans"
     queryset = WorkoutPlan.objects.select_related("created_by").prefetch_related(
         "exercises"
