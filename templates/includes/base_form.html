@@ -13,11 +13,11 @@
             {% csrf_token %}
             {{ form|crispy }}
             <div class="d-flex gap-2 mt-3">
-              <button type="submit" class="btn btn-success rounded-pill">
+              <button type="submit" class="btn btn-success btn-sm rounded-pill">
                 Save
               </button>
               <a href="{% block cancel_url %}{% endblock %}"
-                 class="btn btn-secondary rounded-pill">
+                 class="btn btn-secondary btn-sm rounded-pill">
                 Cancel
               </a>
             </div>
