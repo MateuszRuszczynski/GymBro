@@ -2,35 +2,32 @@ from datetime import date, timedelta
 
 from django.test import TestCase
 
-from tracker.forms import MuscleGroupForm, ExerciseForm, GymUserUpdateForm, WorkoutPlanForm, WorkoutLogForm, \
-    ExerciseSearchForm, GymUserSearchForm
+from tracker.forms import (
+    MuscleGroupForm,
+    ExerciseForm,
+    GymUserUpdateForm,
+    WorkoutPlanForm,
+    WorkoutLogForm,
+    ExerciseSearchForm,
+    GymUserSearchForm,
+)
 from tracker.models import MuscleGroup, Exercise, GymUser, WorkoutPlan
 
 
 class MuscleGroupFormTest(TestCase):
     def test_name_too_short(self):
-        form = MuscleGroupForm(
-            data={
-                "name": "Tr"
-            }
-        )
+        form = MuscleGroupForm(data={"name": "Tr"})
         self.assertFalse(form.is_valid())
         self.assertIn("name", form.errors)
 
     def test_with_valid_data(self):
-        form = MuscleGroupForm(
-            data={
-                "name": "Triceps"
-            }
-        )
+        form = MuscleGroupForm(data={"name": "Triceps"})
         self.assertTrue(form.is_valid())
 
 
 class ExerciseFormTest(TestCase):
     def setUp(self):
-        self.muscle_group = MuscleGroup.objects.create(
-            name="Legs"
-        )
+        self.muscle_group = MuscleGroup.objects.create(name="Legs")
 
     def test_name_too_short(self):
         form = ExerciseForm(
@@ -39,7 +36,7 @@ class ExerciseFormTest(TestCase):
                 "description": "",
                 "difficulty": "intermediate",
                 "equipment": "barbell",
-                "muscle_group": self.muscle_group.pk
+                "muscle_group": self.muscle_group.pk,
             }
         )
         self.assertFalse(form.is_valid())
@@ -52,7 +49,7 @@ class ExerciseFormTest(TestCase):
                 "description": "",
                 "difficulty": "intermediate",
                 "equipment": "barbell",
-                "muscle_group": self.muscle_group.pk
+                "muscle_group": self.muscle_group.pk,
             }
         )
         self.assertTrue(form.is_valid())
@@ -64,7 +61,7 @@ class ExerciseFormTest(TestCase):
                 "description": "",
                 "difficulty": "intermediate",
                 "equipment": "ba",
-                "muscle_group": self.muscle_group.pk
+                "muscle_group": self.muscle_group.pk,
             }
         )
         self.assertFalse(form.is_valid())
@@ -77,7 +74,7 @@ class ExerciseFormTest(TestCase):
                 "description": "",
                 "difficulty": "intermediate",
                 "equipment": "barbell",
-                "muscle_group": self.muscle_group.pk
+                "muscle_group": self.muscle_group.pk,
             }
         )
         self.assertTrue(form.is_valid())
@@ -144,13 +141,13 @@ class WorkoutPlanFormTest(TestCase):
             name="Squat",
             description="The best legs exercise",
             difficulty="intermediate",
-            muscle_group=self.muscle_group
+            muscle_group=self.muscle_group,
         )
         self.valid_data = {
             "name": "Power",
             "description": "",
             "exercises": self.exercise.pk,
-            "goal": "strength"
+            "goal": "strength",
         }
 
     def test_multiple_exercises_valid(self):
@@ -158,7 +155,7 @@ class WorkoutPlanFormTest(TestCase):
             name="Leg press",
             description="The best legs exercise",
             difficulty="intermediate",
-            muscle_group=self.muscle_group
+            muscle_group=self.muscle_group,
         )
         data = self.valid_data.copy()
         data["exercises"] = [second_exercise.pk, self.exercise.pk]
@@ -238,26 +235,6 @@ class WorkoutLogFormTest(TestCase):
 
 
 class ExerciseSearchFormTest(TestCase):
-    def test_empty_search_is_valid(self):
-        form = ExerciseSearchForm(data={"exercise": ""})
-        self.assertTrue(form.is_valid())
-
-    def test_valid_search_term(self):
-        form = ExerciseSearchForm(data={"exercise": "Bench Press"})
-        self.assertTrue(form.is_valid())
-
-    def test_search_term_too_long(self):
-        form = ExerciseSearchForm(data={"exercise": "x" * 51})
-        self.assertFalse(form.is_valid())
-        self.assertIn("exercise", form.errors)
-
-    def test_search_term_exactly_50_chars_is_valid(self):
-        form = ExerciseSearchForm(data={"exercise": "x" * 50})
-        self.assertTrue(form.is_valid())
-
-
-class ExerciseSearchFormTest(TestCase):
-
     def test_empty_search_is_valid(self):
         form = ExerciseSearchForm(data={"exercise": ""})
         self.assertTrue(form.is_valid())

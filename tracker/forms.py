@@ -14,7 +14,9 @@ class MuscleGroupForm(forms.ModelForm):
     def clean_name(self):
         name = self.cleaned_data["name"]
         if len(name) <= 2:
-            raise forms.ValidationError("Muscle group name must be at least 3 characters.")
+            raise forms.ValidationError(
+                "Muscle group name must be at least 3 characters."
+            )
         return name
 
 
@@ -45,7 +47,7 @@ class GymUserCreationForm(UserCreationForm):
 
 
 class GymUserUpdateForm(forms.ModelForm):
-    class Meta():
+    class Meta:
         model = get_user_model()
         fields = (
             "username",
@@ -86,15 +88,19 @@ class WorkoutPlanForm(forms.ModelForm):
     class Meta:
         model = WorkoutPlan
         fields = ["name", "description", "exercises", "goal"]
-        widgets = {
-            "exercises": forms.CheckboxSelectMultiple()
-        }
+        widgets = {"exercises": forms.CheckboxSelectMultiple()}
 
 
 class WorkoutLogForm(forms.ModelForm):
     class Meta:
         model = WorkoutLog
-        fields = ["workout_plan", "date", "duration_minutes", "notes", "is_personal_record"]
+        fields = [
+            "workout_plan",
+            "date",
+            "duration_minutes",
+            "notes",
+            "is_personal_record",
+        ]
         widgets = {
             "date": forms.DateInput(attrs={"type": "date"}),
             "notes": forms.Textarea(attrs={"rows": 3}),

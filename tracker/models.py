@@ -22,7 +22,9 @@ class GymUser(AbstractUser):
     height = models.DecimalField(max_digits=4, decimal_places=1, blank=True, null=True)
     weight = models.DecimalField(max_digits=4, decimal_places=1, blank=True, null=True)
     date_of_birth = models.DateField(blank=True, null=True)
-    membership_type = models.CharField(max_length=20, choices=MEMBERSHIP_CHOICES, default="free")
+    membership_type = models.CharField(
+        max_length=20, choices=MEMBERSHIP_CHOICES, default="free"
+    )
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

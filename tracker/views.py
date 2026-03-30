@@ -4,10 +4,22 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView,
+)
 
-from tracker.forms import ExerciseForm, GymUserCreationForm, GymUserUpdateForm, WorkoutLogForm, \
-    MuscleGroupForm, WorkoutPlanForm
+from tracker.forms import (
+    ExerciseForm,
+    GymUserCreationForm,
+    GymUserUpdateForm,
+    WorkoutLogForm,
+    MuscleGroupForm,
+    WorkoutPlanForm,
+)
 from tracker.models import Exercise, MuscleGroup, GymUser, WorkoutLog, WorkoutPlan
 
 
@@ -19,12 +31,11 @@ def index(request):
         "total_plans": WorkoutPlan.objects.count(),
         "total_logs": WorkoutLog.objects.count(),
         "recent_logs": WorkoutLog.objects.select_related(
-            "user",
-            "workout_plan"
+            "user", "workout_plan"
         ).order_by("-date")[:5],
-        "personal_records": WorkoutLog.objects.filter(
-            is_personal_record=True
-        ).select_related("user", "workout_plan").order_by("-date")[:5],
+        "personal_records": WorkoutLog.objects.filter(is_personal_record=True)
+        .select_related("user", "workout_plan")
+        .order_by("-date")[:5],
     }
     return render(request, "tracker/index.html", context=context)
 
@@ -51,8 +62,8 @@ class ExerciseListView(LoginRequiredMixin, ListView):
         exercise_search = self.request.GET.get("exercise")
         if exercise_search:
             return queryset.filter(
-                Q(name__icontains=exercise_search) |
-                Q(muscle_group__name__icontains=exercise_search)
+                Q(name__icontains=exercise_search)
+                | Q(muscle_group__name__icontains=exercise_search)
             )
         return queryset
 
@@ -123,9 +134,9 @@ class GymUserListView(LoginRequiredMixin, ListView):
         gym_search = self.request.GET.get("gym_user")
         if gym_search:
             return queryset.filter(
-                Q(username__icontains=gym_search) |
-                Q(first_name__icontains=gym_search) |
-                Q(last_name__icontains=gym_search)
+                Q(username__icontains=gym_search)
+                | Q(first_name__icontains=gym_search)
+                | Q(last_name__icontains=gym_search)
             )
         return queryset
 
@@ -209,17 +220,17 @@ class WorkoutLogDeleteView(LoginRequiredMixin, DeleteView):
 class WorkoutPlanListView(LoginRequiredMixin, ListView):
     model = WorkoutPlan
     context_object_name = "workout_plans"
-    queryset = WorkoutPlan.objects.select_related(
-        "created_by"
-    ).prefetch_related("exercises")
+    queryset = WorkoutPlan.objects.select_related("created_by").prefetch_related(
+        "exercises"
+    )
 
 
 class WorkoutPlanDetailView(LoginRequiredMixin, DetailView):
     model = WorkoutPlan
     context_object_name = "workout_plan"
-    queryset = WorkoutPlan.objects.select_related(
-        "created_by"
-    ).prefetch_related("exercises")
+    queryset = WorkoutPlan.objects.select_related("created_by").prefetch_related(
+        "exercises"
+    )
 
 
 class WorkoutPlanCreateView(LoginRequiredMixin, CreateView):

@@ -20,7 +20,7 @@ class GymUserModelTests(TestCase):
             password="test123",
             first_name="Marco",
             last_name="Doe",
-            membership_type="premium"
+            membership_type="premium",
         )
 
     def test_str(self):

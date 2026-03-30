@@ -37,11 +37,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    #Third party
+    # Third party
     "crispy_forms",
     "crispy_bootstrap5",
-    #Local
-    "tracker"
+    # Local
+    "tracker",
 ]
 
 MIDDLEWARE = [
@@ -59,8 +59,7 @@ ROOT_URLCONF = "gymbro.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'templates']
-        ,
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

@@ -41,7 +41,13 @@ class GymUserAdmin(UserAdmin):
             },
         ),
     )
-    list_display = UserAdmin.list_display + ("bio", "height", "weight", "date_of_birth", "membership_type")
+    list_display = UserAdmin.list_display + (
+        "bio",
+        "height",
+        "weight",
+        "date_of_birth",
+        "membership_type",
+    )
 
 
 @admin.register(Exercise)
@@ -60,5 +66,11 @@ class WorkoutPlanAdmin(admin.ModelAdmin):
 
 @admin.register(WorkoutLog)
 class WorkoutLogAdmin(admin.ModelAdmin):
-    list_display = ["user", "workout_plan", "date", "duration_minutes", "is_personal_record"]
+    list_display = [
+        "user",
+        "workout_plan",
+        "date",
+        "duration_minutes",
+        "is_personal_record",
+    ]
     list_filter = ["is_personal_record"]
