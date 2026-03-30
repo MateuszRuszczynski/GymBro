@@ -211,6 +211,7 @@
       "bio": "Strongman",
       "height": "190.0",
       "weight": "110.0",
+      "membership_type": "premium",
       "is_staff": false,
       "is_superuser": false,
       "date_joined": "2024-01-01T10:00:00Z"
@@ -226,6 +227,7 @@
       "bio": "Yoga & Gym",
       "height": "170.0",
       "weight": "65.0",
+      "membership_type": "coach",
       "is_staff": false,
       "is_superuser": false,
       "date_joined": "2024-01-02T10:00:00Z"
@@ -241,6 +243,7 @@
       "bio": "PT 10yr exp",
       "height": "180.0",
       "weight": "85.0",
+      "membership_type": "coach",
       "is_staff": true,
       "is_superuser": false,
       "date_joined": "2024-01-03T10:00:00Z"
@@ -271,6 +274,7 @@
       "bio": "Endurance",
       "height": "178.0",
       "weight": "70.0",
+      "membership_type": "premium",
       "is_staff": false,
       "is_superuser": false,
       "date_joined": "2024-01-05T10:00:00Z"
