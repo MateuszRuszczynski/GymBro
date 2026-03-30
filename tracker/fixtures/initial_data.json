@@ -2,79 +2,65 @@
   {
     "model": "tracker.musclegroup",
     "pk": 1,
-    "fields": {
-      "name": "Chest"
-    }
+    "fields": { "name": "Chest" }
   },
   {
     "model": "tracker.musclegroup",
     "pk": 2,
-    "fields": {
-      "name": "Back"
-    }
+    "fields": { "name": "Back" }
   },
   {
     "model": "tracker.musclegroup",
     "pk": 3,
-    "fields": {
-      "name": "Legs"
-    }
+    "fields": { "name": "Legs" }
   },
   {
     "model": "tracker.musclegroup",
     "pk": 4,
-    "fields": {
-      "name": "Shoulders"
-    }
+    "fields": { "name": "Shoulders" }
   },
   {
     "model": "tracker.musclegroup",
     "pk": 5,
-    "fields": {
-      "name": "Arms"
-    }
+    "fields": { "name": "Arms" }
   },
   {
     "model": "tracker.musclegroup",
     "pk": 6,
-    "fields": {
-      "name": "Core"
-    }
+    "fields": { "name": "Core" }
   },
   {
     "model": "tracker.musclegroup",
     "pk": 7,
-    "fields": {
-      "name": "Glutes"
-    }
+    "fields": { "name": "Glutes" }
   },
   {
     "model": "tracker.musclegroup",
     "pk": 8,
-    "fields": {
-      "name": "Cardio"
-    }
+    "fields": { "name": "Calves" }
   },
   {
     "model": "tracker.musclegroup",
     "pk": 9,
-    "fields": {
-      "name": "Forearms"
-    }
+    "fields": { "name": "Forearms" }
   },
   {
     "model": "tracker.musclegroup",
     "pk": 10,
-    "fields": {
-      "name": "Calves"
-    }
+    "fields": { "name": "Traps" }
   },
+  {
+    "model": "tracker.musclegroup",
+    "pk": 11,
+    "fields": { "name": "Hamstrings" }
+  },
+
   {
     "model": "tracker.exercise",
     "pk": 1,
     "fields": {
       "name": "Bench Press",
-      "description": "Classic chest power.",
+      "description": "Classic chest exercise using a barbell on a flat bench.",
       "difficulty": "intermediate",
       "equipment": "Barbell",
       "muscle_group": 1
@@ -84,8 +70,52 @@
     "model": "tracker.exercise",
     "pk": 2,
     "fields": {
+      "name": "Incline Dumbbell Press",
+      "description": "Upper chest focused press on an incline bench.",
+      "difficulty": "intermediate",
+      "equipment": "Dumbbell",
+      "muscle_group": 1
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 3,
+    "fields": {
+      "name": "Push Up",
+      "description": "Bodyweight chest exercise. Great for beginners.",
+      "difficulty": "beginner",
+      "equipment": "Bodyweight",
+      "muscle_group": 1
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 4,
+    "fields": {
+      "name": "Cable Fly",
+      "description": "Isolation exercise for chest using cable machine.",
+      "difficulty": "beginner",
+      "equipment": "Cable",
+      "muscle_group": 1
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 5,
+    "fields": {
+      "name": "Pull Up",
+      "description": "Compound back exercise using bodyweight.",
+      "difficulty": "intermediate",
+      "equipment": "Bodyweight",
+      "muscle_group": 2
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 6,
+    "fields": {
       "name": "Deadlift",
-      "description": "King of pulling.",
+      "description": "King of all exercises. Works the entire posterior chain.",
       "difficulty": "advanced",
       "equipment": "Barbell",
       "muscle_group": 2
@@ -93,10 +123,32 @@
   },
   {
     "model": "tracker.exercise",
-    "pk": 3,
+    "pk": 7,
+    "fields": {
+      "name": "Barbell Row",
+      "description": "Horizontal pulling movement for a thick back.",
+      "difficulty": "intermediate",
+      "equipment": "Barbell",
+      "muscle_group": 2
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 8,
+    "fields": {
+      "name": "Lat Pulldown",
+      "description": "Machine exercise targeting the latissimus dorsi.",
+      "difficulty": "beginner",
+      "equipment": "Machine",
+      "muscle_group": 2
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 9,
     "fields": {
       "name": "Squat",
-      "description": "Leg foundation.",
+      "description": "The fundamental leg exercise for strength and mass.",
       "difficulty": "intermediate",
       "equipment": "Barbell",
       "muscle_group": 3
@@ -104,10 +156,32 @@
   },
   {
     "model": "tracker.exercise",
-    "pk": 4,
+    "pk": 10,
+    "fields": {
+      "name": "Leg Press",
+      "description": "Machine exercise targeting quads, hamstrings and glutes.",
+      "difficulty": "beginner",
+      "equipment": "Machine",
+      "muscle_group": 3
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 11,
+    "fields": {
+      "name": "Leg Extension",
+      "description": "Isolation exercise for the quadriceps.",
+      "difficulty": "beginner",
+      "equipment": "Machine",
+      "muscle_group": 3
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 12,
     "fields": {
       "name": "Overhead Press",
-      "description": "Shoulder strength.",
+      "description": "Vertical pressing movement for shoulder strength.",
       "difficulty": "intermediate",
       "equipment": "Barbell",
       "muscle_group": 4
@@ -115,10 +189,21 @@
   },
   {
     "model": "tracker.exercise",
-    "pk": 5,
+    "pk": 13,
+    "fields": {
+      "name": "Lateral Raise",
+      "description": "Isolation exercise for the lateral deltoid.",
+      "difficulty": "beginner",
+      "equipment": "Dumbbell",
+      "muscle_group": 4
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 14,
     "fields": {
       "name": "Barbell Curl",
-      "description": "Bicep builder.",
+      "description": "Classic bicep isolation exercise.",
       "difficulty": "beginner",
       "equipment": "Barbell",
       "muscle_group": 5
@@ -126,10 +211,43 @@
   },
   {
     "model": "tracker.exercise",
-    "pk": 6,
+    "pk": 15,
+    "fields": {
+      "name": "Tricep Pushdown",
+      "description": "Cable exercise isolating the triceps.",
+      "difficulty": "beginner",
+      "equipment": "Cable",
+      "muscle_group": 5
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 16,
+    "fields": {
+      "name": "Hammer Curl",
+      "description": "Neutral grip curl targeting brachialis and brachioradialis.",
+      "difficulty": "beginner",
+      "equipment": "Dumbbell",
+      "muscle_group": 5
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 17,
+    "fields": {
+      "name": "Skull Crusher",
+      "description": "Lying tricep extension with a barbell.",
+      "difficulty": "intermediate",
+      "equipment": "Barbell",
+      "muscle_group": 5
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 18,
     "fields": {
       "name": "Plank",
-      "description": "Core stability.",
+      "description": "Isometric core exercise for stability and endurance.",
       "difficulty": "beginner",
       "equipment": "Bodyweight",
       "muscle_group": 6
@@ -137,10 +255,32 @@
   },
   {
     "model": "tracker.exercise",
-    "pk": 7,
+    "pk": 19,
+    "fields": {
+      "name": "Cable Crunch",
+      "description": "Weighted ab exercise using a cable machine.",
+      "difficulty": "intermediate",
+      "equipment": "Cable",
+      "muscle_group": 6
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 20,
+    "fields": {
+      "name": "Romanian Deadlift",
+      "description": "Hip hinge movement targeting hamstrings and glutes.",
+      "difficulty": "intermediate",
+      "equipment": "Barbell",
+      "muscle_group": 11
+    }
+  },
+  {
+    "model": "tracker.exercise",
+    "pk": 21,
     "fields": {
       "name": "Hip Thrust",
-      "description": "Glute isolation.",
+      "description": "Glute focused exercise using a barbell.",
       "difficulty": "intermediate",
       "equipment": "Barbell",
       "muscle_group": 7
@@ -148,89 +288,91 @@
   },
   {
     "model": "tracker.exercise",
-    "pk": 8,
+    "pk": 22,
     "fields": {
-      "name": "Burpees",
-      "description": "Conditioning killer.",
-      "difficulty": "intermediate",
-      "equipment": "Bodyweight",
+      "name": "Standing Calf Raise",
+      "description": "Isolation exercise for the gastrocnemius.",
+      "difficulty": "beginner",
+      "equipment": "Machine",
       "muscle_group": 8
     }
   },
   {
     "model": "tracker.exercise",
-    "pk": 9,
+    "pk": 23,
     "fields": {
-      "name": "Wrist Curls",
-      "description": "Forearm pump.",
+      "name": "Wrist Curl",
+      "description": "Isolation exercise for forearm flexors.",
       "difficulty": "beginner",
-      "equipment": "Dumbbell",
+      "equipment": "Barbell",
       "muscle_group": 9
     }
   },
   {
     "model": "tracker.exercise",
-    "pk": 10,
+    "pk": 24,
     "fields": {
-      "name": "Calf Raise",
-      "description": "Don't skip these.",
+      "name": "Shrug",
+      "description": "Isolation exercise for the trapezius muscle.",
       "difficulty": "beginner",
-      "equipment": "Machine",
+      "equipment": "Dumbbell",
       "muscle_group": 10
     }
   },
   {
     "model": "tracker.exercise",
-    "pk": 11,
+    "pk": 25,
     "fields": {
-      "name": "Pull Ups",
-      "description": "Back width.",
-      "difficulty": "intermediate",
-      "equipment": "Bodyweight",
-      "muscle_group": 2
+      "name": "Front Squat",
+      "description": "Barbell squat variation with the bar in front rack position.",
+      "difficulty": "advanced",
+      "equipment": "Barbell",
+      "muscle_group": 3
     }
   },
-  {
-    "model": "tracker.exercise",
-    "pk": 12,
-    "fields": {
-      "name": "Lateral Raise",
-      "description": "Side delts.",
-      "difficulty": "beginner",
-      "equipment": "Dumbbell",
-      "muscle_group": 4
-    }
-  },
+
   {
     "model": "tracker.gymuser",
     "pk": 1,
     "fields": {
-      "username": "power_user",
-      "email": "power@gym.com",
-      "password": "pbkdf2_sha256$720000$test$dummy",
-      "bio": "Strongman",
-      "height": "190.0",
-      "weight": "110.0",
+      "username": "john_doe",
+      "email": "john@gymbro.com",
+      "first_name": "John",
+      "last_name": "Doe",
+      "password": "pbkdf2_sha256$720000$test$dummyhashvalue1234567890",
+      "bio": "Powerlifter focused on strength gains. Training for 5 years.",
+      "height": "182.00",
+      "weight": "90.00",
+      "date_of_birth": "1995-04-12",
       "membership_type": "premium",
-      "is_staff": false,
       "is_superuser": false,
-      "date_joined": "2024-01-01T10:00:00Z"
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-01-01T10:00:00Z",
+      "groups": [],
+      "user_permissions": []
     }
   },
   {
     "model": "tracker.gymuser",
     "pk": 2,
     "fields": {
-      "username": "fit_sarah",
-      "email": "sarah@gym.com",
-      "password": "pbkdf2_sha256$720000$test$dummy",
-      "bio": "Yoga & Gym",
-      "height": "170.0",
-      "weight": "65.0",
-      "membership_type": "coach",
-      "is_staff": false,
+      "username": "jane_fit",
+      "email": "jane@gymbro.com",
+      "first_name": "Jane",
+      "last_name": "Smith",
+      "password": "pbkdf2_sha256$720000$test$dummyhashvalue1234567890",
+      "bio": "Loves hypertrophy training and yoga. Competing in bikini fitness.",
+      "height": "165.00",
+      "weight": "58.00",
+      "date_of_birth": "1998-07-23",
+      "membership_type": "premium",
       "is_superuser": false,
-      "date_joined": "2024-01-02T10:00:00Z"
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-02-15T10:00:00Z",
+      "groups": [],
+      "user_permissions": []
     }
   },
   {
@@ -238,287 +380,342 @@
     "pk": 3,
     "fields": {
       "username": "coach_mike",
-      "email": "mike@gym.com",
-      "password": "pbkdf2_sha256$720000$test$dummy",
-      "bio": "PT 10yr exp",
-      "height": "180.0",
-      "weight": "85.0",
+      "email": "mike@gymbro.com",
+      "first_name": "Mike",
+      "last_name": "Johnson",
+      "password": "pbkdf2_sha256$720000$test$dummyhashvalue1234567890",
+      "bio": "Certified personal trainer with 10 years experience.",
+      "height": "178.00",
+      "weight": "82.00",
+      "date_of_birth": "1988-11-05",
       "membership_type": "coach",
-      "is_staff": true,
       "is_superuser": false,
-      "date_joined": "2024-01-03T10:00:00Z"
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-01-10T10:00:00Z",
+      "groups": [],
+      "user_permissions": []
     }
   },
   {
     "model": "tracker.gymuser",
     "pk": 4,
     "fields": {
-      "username": "admin_bro",
-      "email": "admin@gym.com",
-      "password": "pbkdf2_sha256$720000$test$dummy",
-      "bio": "The Boss",
-      "height": "175.0",
-      "weight": "80.0",
-      "is_staff": true,
-      "is_superuser": true,
-      "date_joined": "2024-01-04T10:00:00Z"
+      "username": "alex_gains",
+      "email": "alex@gymbro.com",
+      "first_name": "Alex",
+      "last_name": "Williams",
+      "password": "pbkdf2_sha256$720000$test$dummyhashvalue1234567890",
+      "bio": "Bodybuilder preparing for first competition.",
+      "height": "180.00",
+      "weight": "88.00",
+      "date_of_birth": "1997-03-15",
+      "membership_type": "premium",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-03-01T10:00:00Z",
+      "groups": [],
+      "user_permissions": []
     }
   },
   {
     "model": "tracker.gymuser",
     "pk": 5,
     "fields": {
-      "username": "marathon_man",
-      "email": "run@gym.com",
-      "password": "pbkdf2_sha256$720000$test$dummy",
-      "bio": "Endurance",
-      "height": "178.0",
-      "weight": "70.0",
-      "membership_type": "premium",
-      "is_staff": false,
+      "username": "sara_strong",
+      "email": "sara@gymbro.com",
+      "first_name": "Sara",
+      "last_name": "Brown",
+      "password": "pbkdf2_sha256$720000$test$dummyhashvalue1234567890",
+      "bio": "CrossFit enthusiast and marathon runner.",
+      "height": "170.00",
+      "weight": "65.00",
+      "date_of_birth": "1993-09-28",
+      "membership_type": "free",
       "is_superuser": false,
-      "date_joined": "2024-01-05T10:00:00Z"
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-03-10T10:00:00Z",
+      "groups": [],
+      "user_permissions": []
     }
   },
   {
     "model": "tracker.gymuser",
     "pk": 6,
     "fields": {
-      "username": "kettle_bell",
-      "email": "kb@gym.com",
-      "password": "pbkdf2_sha256$720000$test$dummy",
-      "bio": "Functional",
-      "height": "165.0",
-      "weight": "62.0",
-      "is_staff": false,
+      "username": "tom_lifts",
+      "email": "tom@gymbro.com",
+      "first_name": "Tom",
+      "last_name": "Davis",
+      "password": "pbkdf2_sha256$720000$test$dummyhashvalue1234567890",
+      "bio": "Beginner lifter, 6 months in. Loving the journey.",
+      "height": "175.00",
+      "weight": "75.00",
+      "date_of_birth": "2000-01-20",
+      "membership_type": "free",
       "is_superuser": false,
-      "date_joined": "2024-01-06T10:00:00Z"
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-01T10:00:00Z",
+      "groups": [],
+      "user_permissions": []
     }
   },
   {
     "model": "tracker.gymuser",
     "pk": 7,
     "fields": {
-      "username": "beast_mode",
-      "email": "beast@gym.com",
-      "password": "pbkdf2_sha256$720000$test$dummy",
-      "bio": "No pain no gain",
-      "height": "185.0",
-      "weight": "95.0",
-      "is_staff": false,
+      "username": "coach_anna",
+      "email": "anna@gymbro.com",
+      "first_name": "Anna",
+      "last_name": "Wilson",
+      "password": "pbkdf2_sha256$720000$test$dummyhashvalue1234567890",
+      "bio": "Yoga and pilates instructor turned strength coach.",
+      "height": "168.00",
+      "weight": "62.00",
+      "date_of_birth": "1990-06-14",
+      "membership_type": "coach",
       "is_superuser": false,
-      "date_joined": "2024-01-07T10:00:00Z"
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-01-20T10:00:00Z",
+      "groups": [],
+      "user_permissions": []
     }
   },
   {
     "model": "tracker.gymuser",
     "pk": 8,
     "fields": {
-      "username": "yoga_queen",
-      "email": "yoga@gym.com",
-      "password": "pbkdf2_sha256$720000$test$dummy",
-      "bio": "Flexibility first",
-      "height": "160.0",
-      "weight": "55.0",
-      "is_staff": false,
+      "username": "max_power",
+      "email": "max@gymbro.com",
+      "first_name": "Max",
+      "last_name": "Taylor",
+      "password": "pbkdf2_sha256$720000$test$dummyhashvalue1234567890",
+      "bio": "Olympic weightlifter. Snatch PR 120kg.",
+      "height": "176.00",
+      "weight": "85.00",
+      "date_of_birth": "1996-12-03",
+      "membership_type": "premium",
       "is_superuser": false,
-      "date_joined": "2024-01-08T10:00:00Z"
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-02-01T10:00:00Z",
+      "groups": [],
+      "user_permissions": []
     }
   },
   {
     "model": "tracker.gymuser",
     "pk": 9,
     "fields": {
-      "username": "weekend_warrior",
-      "email": "ww@gym.com",
-      "password": "pbkdf2_sha256$720000$test$dummy",
-      "bio": "Busy Dad",
-      "height": "177.0",
-      "weight": "88.0",
-      "is_staff": false,
+      "username": "lily_active",
+      "email": "lily@gymbro.com",
+      "first_name": "Lily",
+      "last_name": "Moore",
+      "password": "pbkdf2_sha256$720000$test$dummyhashvalue1234567890",
+      "bio": "Fitness model and online coach.",
+      "height": "163.00",
+      "weight": "55.00",
+      "date_of_birth": "1999-05-17",
+      "membership_type": "premium",
       "is_superuser": false,
-      "date_joined": "2024-01-09T10:00:00Z"
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-02-20T10:00:00Z",
+      "groups": [],
+      "user_permissions": []
     }
   },
   {
     "model": "tracker.gymuser",
     "pk": 10,
     "fields": {
-      "username": "pro_athlete",
-      "email": "pro@gym.com",
-      "password": "pbkdf2_sha256$720000$test$dummy",
-      "bio": "Olympiad",
-      "height": "182.0",
-      "weight": "78.0",
-      "is_staff": false,
+      "username": "rick_bulk",
+      "email": "rick@gymbro.com",
+      "first_name": "Rick",
+      "last_name": "Martinez",
+      "password": "pbkdf2_sha256$720000$test$dummyhashvalue1234567890",
+      "bio": "Currently on a bulk. Aiming for 100kg bodyweight.",
+      "height": "183.00",
+      "weight": "95.00",
+      "date_of_birth": "1994-08-09",
+      "membership_type": "free",
       "is_superuser": false,
-      "date_joined": "2024-01-10T10:00:00Z"
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-15T10:00:00Z",
+      "groups": [],
+      "user_permissions": []
     }
   },
+  {
+    "model": "tracker.gymuser",
+    "pk": 11,
+    "fields": {
+      "username": "kat_shred",
+      "email": "kat@gymbro.com",
+      "first_name": "Kat",
+      "last_name": "Anderson",
+      "password": "pbkdf2_sha256$720000$test$dummyhashvalue1234567890",
+      "bio": "Cutting season forever. Cardio queen.",
+      "height": "160.00",
+      "weight": "52.00",
+      "date_of_birth": "2001-02-25",
+      "membership_type": "free",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-05-01T10:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+
   {
     "model": "tracker.workoutplan",
     "pk": 1,
     "fields": {
-      "name": "Full Body A",
-      "description": "Compound focus.",
+      "name": "Beginner Full Body",
+      "description": "A simple 3-day full body program for beginners.",
       "created_by": 3,
-      "exercises": [
-        1,
-        2,
-        3
-      ],
+      "exercises": [3, 10, 13, 18, 14],
       "goal": "strength",
-      "created_at": "2024-03-01T10:00:00Z"
+      "created_at": "2024-01-15T10:00:00Z"
     }
   },
   {
     "model": "tracker.workoutplan",
     "pk": 2,
     "fields": {
-      "name": "Push Day",
-      "description": "Chest and Tri.",
-      "created_by": 3,
-      "exercises": [
-        1,
-        4,
-        12
-      ],
+      "name": "Push Pull Legs",
+      "description": "Classic PPL split for intermediate lifters. 6 days per week.",
+      "created_by": 1,
+      "exercises": [1, 2, 12, 5, 6, 7, 9, 20],
       "goal": "hypertrophy",
-      "created_at": "2024-03-02T10:00:00Z"
+      "created_at": "2024-02-01T10:00:00Z"
     }
   },
   {
     "model": "tracker.workoutplan",
     "pk": 3,
     "fields": {
-      "name": "Pull Day",
-      "description": "Back and Bi.",
-      "created_by": 3,
-      "exercises": [
-        2,
-        11,
-        5
-      ],
-      "goal": "hypertrophy",
-      "created_at": "2024-03-03T10:00:00Z"
+      "name": "Powerlifting Program",
+      "description": "Focus on the big three: squat, bench, deadlift.",
+      "created_by": 1,
+      "exercises": [1, 6, 9],
+      "goal": "strength",
+      "created_at": "2024-03-01T10:00:00Z"
     }
   },
   {
     "model": "tracker.workoutplan",
     "pk": 4,
     "fields": {
-      "name": "Leg Day",
-      "description": "Quads/Glutes.",
+      "name": "Hypertrophy Upper Body",
+      "description": "Upper body focused program for muscle growth.",
       "created_by": 3,
-      "exercises": [
-        3,
-        7,
-        10
-      ],
-      "goal": "strength",
-      "created_at": "2024-03-04T10:00:00Z"
+      "exercises": [1, 2, 5, 7, 12, 14, 15, 16, 17],
+      "goal": "hypertrophy",
+      "created_at": "2024-02-10T10:00:00Z"
     }
   },
   {
     "model": "tracker.workoutplan",
     "pk": 5,
     "fields": {
-      "name": "Core Blast",
-      "description": "15 min abs.",
-      "created_by": 3,
-      "exercises": [
-        6
-      ],
-      "goal": "fat_loss",
-      "created_at": "2024-03-05T10:00:00Z"
+      "name": "Leg Day Destroyer",
+      "description": "Intense leg workout targeting all lower body muscle groups.",
+      "created_by": 7,
+      "exercises": [9, 10, 11, 20, 21, 22],
+      "goal": "hypertrophy",
+      "created_at": "2024-01-25T10:00:00Z"
     }
   },
   {
     "model": "tracker.workoutplan",
     "pk": 6,
     "fields": {
-      "name": "Cardio Burn",
-      "description": "High heart rate.",
-      "created_by": 3,
-      "exercises": [
-        8
-      ],
-      "goal": "fat_loss",
-      "created_at": "2024-03-06T10:00:00Z"
+      "name": "Core and Conditioning",
+      "description": "Full core workout with conditioning elements.",
+      "created_by": 7,
+      "exercises": [18, 19, 3, 22],
+      "goal": "endurance",
+      "created_at": "2024-03-05T10:00:00Z"
     }
   },
   {
     "model": "tracker.workoutplan",
     "pk": 7,
     "fields": {
-      "name": "The Big 3",
-      "description": "S/B/D only.",
-      "created_by": 1,
-      "exercises": [
-        1,
-        2,
-        3
-      ],
+      "name": "Olympic Lifting Program",
+      "description": "Snatch and clean and jerk focused program for advanced athletes.",
+      "created_by": 8,
+      "exercises": [6, 9, 25, 12],
       "goal": "strength",
-      "created_at": "2024-03-07T10:00:00Z"
+      "created_at": "2024-02-15T10:00:00Z"
     }
   },
   {
     "model": "tracker.workoutplan",
     "pk": 8,
     "fields": {
-      "name": "Beach Body",
-      "description": "Arms and delts.",
+      "name": "Weight Loss Circuit",
+      "description": "High rep circuit training designed for maximum calorie burn.",
       "created_by": 3,
-      "exercises": [
-        5,
-        12,
-        9
-      ],
-      "goal": "hypertrophy",
-      "created_at": "2024-03-08T10:00:00Z"
+      "exercises": [3, 18, 13, 22, 19],
+      "goal": "weight_loss",
+      "created_at": "2024-03-15T10:00:00Z"
     }
   },
   {
     "model": "tracker.workoutplan",
     "pk": 9,
     "fields": {
-      "name": "Recovery",
-      "description": "Light work.",
-      "created_by": 3,
-      "exercises": [
-        6,
-        10
-      ],
-      "goal": "strength",
-      "created_at": "2024-03-09T10:00:00Z"
+      "name": "Arm Specialization",
+      "description": "Dedicated arm program for adding size to biceps and triceps.",
+      "created_by": 4,
+      "exercises": [14, 15, 16, 17, 23],
+      "goal": "hypertrophy",
+      "created_at": "2024-04-01T10:00:00Z"
     }
   },
   {
     "model": "tracker.workoutplan",
     "pk": 10,
     "fields": {
-      "name": "Elite Power",
-      "description": "Advanced only.",
+      "name": "Shoulder and Trap Builder",
+      "description": "Dedicated program for building wide shoulders and thick traps.",
       "created_by": 4,
-      "exercises": [
-        2,
-        4,
-        7
-      ],
-      "goal": "strength",
-      "created_at": "2024-03-10T10:00:00Z"
+      "exercises": [12, 13, 24, 7],
+      "goal": "hypertrophy",
+      "created_at": "2024-04-10T10:00:00Z"
     }
   },
+  {
+    "model": "tracker.workoutplan",
+    "pk": 11,
+    "fields": {
+      "name": "Glute and Hamstring Focus",
+      "description": "Posterior chain program for glute and hamstring development.",
+      "created_by": 9,
+      "exercises": [20, 21, 6, 22],
+      "goal": "hypertrophy",
+      "created_at": "2024-04-20T10:00:00Z"
+    }
+  },
+
   {
     "model": "tracker.workoutlog",
     "pk": 1,
     "fields": {
       "user": 1,
-      "workout_plan": 7,
-      "date": "2024-03-20",
-      "duration_minutes": 90,
-      "notes": "New PR!",
+      "workout_plan": 3,
+      "date": "2024-03-10",
+      "duration_minutes": 75,
+      "notes": "Felt strong today. Hit a new squat PR at 140kg!",
       "is_personal_record": true
     }
   },
@@ -527,10 +724,10 @@
     "pk": 2,
     "fields": {
       "user": 2,
-      "workout_plan": 5,
-      "date": "2024-03-21",
-      "duration_minutes": 20,
-      "notes": "Quick abs.",
+      "workout_plan": 1,
+      "date": "2024-03-11",
+      "duration_minutes": 45,
+      "notes": "Good session, getting the hang of the movements.",
       "is_personal_record": false
     }
   },
@@ -538,11 +735,11 @@
     "model": "tracker.workoutlog",
     "pk": 3,
     "fields": {
-      "user": 5,
-      "workout_plan": 6,
-      "date": "2024-03-22",
-      "duration_minutes": 45,
-      "notes": "Sweating.",
+      "user": 1,
+      "workout_plan": 2,
+      "date": "2024-03-12",
+      "duration_minutes": 90,
+      "notes": "Tough push day. Shoulders were on fire.",
       "is_personal_record": false
     }
   },
@@ -550,11 +747,11 @@
     "model": "tracker.workoutlog",
     "pk": 4,
     "fields": {
-      "user": 7,
-      "workout_plan": 1,
-      "date": "2024-03-23",
+      "user": 3,
+      "workout_plan": 4,
+      "date": "2024-03-13",
       "duration_minutes": 60,
-      "notes": "Solid.",
+      "notes": "Great energy in the gym today.",
       "is_personal_record": false
     }
   },
@@ -562,23 +759,23 @@
     "model": "tracker.workoutlog",
     "pk": 5,
     "fields": {
-      "user": 10,
-      "workout_plan": 10,
-      "date": "2024-03-24",
-      "duration_minutes": 120,
-      "notes": "Pro session.",
-      "is_personal_record": true
+      "user": 4,
+      "workout_plan": 9,
+      "date": "2024-03-14",
+      "duration_minutes": 55,
+      "notes": "Arm pump was insane today.",
+      "is_personal_record": false
     }
   },
   {
     "model": "tracker.workoutlog",
     "pk": 6,
     "fields": {
-      "user": 6,
-      "workout_plan": 4,
-      "date": "2024-03-25",
-      "duration_minutes": 55,
-      "notes": "Legs sore.",
+      "user": 5,
+      "workout_plan": 6,
+      "date": "2024-03-15",
+      "duration_minutes": 40,
+      "notes": "Quick core session before my run.",
       "is_personal_record": false
     }
   },
@@ -586,23 +783,23 @@
     "model": "tracker.workoutlog",
     "pk": 7,
     "fields": {
-      "user": 1,
-      "workout_plan": 2,
-      "date": "2024-03-26",
-      "duration_minutes": 70,
-      "notes": "Great pump.",
-      "is_personal_record": false
+      "user": 8,
+      "workout_plan": 7,
+      "date": "2024-03-16",
+      "duration_minutes": 100,
+      "notes": "New snatch PR — 125kg! Years of work paying off.",
+      "is_personal_record": true
     }
   },
   {
     "model": "tracker.workoutlog",
     "pk": 8,
     "fields": {
-      "user": 9,
-      "workout_plan": 9,
-      "date": "2024-03-27",
-      "duration_minutes": 30,
-      "notes": "Active rest.",
+      "user": 6,
+      "workout_plan": 1,
+      "date": "2024-03-17",
+      "duration_minutes": 50,
+      "notes": "Third session this week. Getting stronger every day!",
       "is_personal_record": false
     }
   },
@@ -610,11 +807,11 @@
     "model": "tracker.workoutlog",
     "pk": 9,
     "fields": {
-      "user": 3,
-      "workout_plan": 3,
-      "date": "2024-03-28",
+      "user": 2,
+      "workout_plan": 5,
+      "date": "2024-03-18",
       "duration_minutes": 65,
-      "notes": "Back day.",
+      "notes": "Leg day was brutal. Can barely walk.",
       "is_personal_record": false
     }
   },
@@ -622,11 +819,71 @@
     "model": "tracker.workoutlog",
     "pk": 10,
     "fields": {
+      "user": 9,
+      "workout_plan": 11,
+      "date": "2024-03-19",
+      "duration_minutes": 70,
+      "notes": "Hip thrusts felt amazing. New PR on glute bridge.",
+      "is_personal_record": true
+    }
+  },
+  {
+    "model": "tracker.workoutlog",
+    "pk": 11,
+    "fields": {
+      "user": 10,
+      "workout_plan": 2,
+      "date": "2024-03-20",
+      "duration_minutes": 85,
+      "notes": "First PPL session. Loved the volume.",
+      "is_personal_record": false
+    }
+  },
+  {
+    "model": "tracker.workoutlog",
+    "pk": 12,
+    "fields": {
+      "user": 1,
+      "workout_plan": 3,
+      "date": "2024-03-21",
+      "duration_minutes": 80,
+      "notes": "Bench press PR — 120kg. Everything clicked today.",
+      "is_personal_record": true
+    }
+  },
+  {
+    "model": "tracker.workoutlog",
+    "pk": 13,
+    "fields": {
       "user": 4,
+      "workout_plan": 10,
+      "date": "2024-03-22",
+      "duration_minutes": 60,
+      "notes": "Shoulders feeling wide. OHP going up nicely.",
+      "is_personal_record": false
+    }
+  },
+  {
+    "model": "tracker.workoutlog",
+    "pk": 14,
+    "fields": {
+      "user": 11,
       "workout_plan": 8,
-      "date": "2024-03-29",
-      "duration_minutes": 40,
-      "notes": "Fast arm day.",
+      "date": "2024-03-23",
+      "duration_minutes": 35,
+      "notes": "Circuit training session. Sweated buckets.",
+      "is_personal_record": false
+    }
+  },
+  {
+    "model": "tracker.workoutlog",
+    "pk": 15,
+    "fields": {
+      "user": 7,
+      "workout_plan": 6,
+      "date": "2024-03-24",
+      "duration_minutes": 45,
+      "notes": "Core feels much stronger after 4 weeks.",
       "is_personal_record": false
     }
   }
