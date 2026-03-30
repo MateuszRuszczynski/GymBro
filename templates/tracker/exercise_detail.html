@@ -13,7 +13,7 @@
           {% elif exercise.difficulty == "intermediate" %}
             <span class="badge bg-warning text-dark">Intermediate</span>
           {% elif exercise.difficulty == "advanced" %}
-            <span class="badge bg-danger">Advanced</span>
+            <span class="badge bg-warning">Advanced</span>
           {% endif %}
         </div>
         <div class="card-body">
@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="card-footer d-flex gap-2">
-          <a href="{% url 'tracker:exercise-update' pk=exercise.pk %}" class="btn btn-warning btn-sm rounded-pill px-3">Edit</a>
+          <a href="{% url 'tracker:exercise-update' pk=exercise.pk %}" class="btn btn-primary btn-sm rounded-pill px-3">Edit</a>
           <a href="{% url 'tracker:exercise-delete' pk=exercise.pk %}" class="btn btn-danger btn-sm rounded-pill px-3">Delete</a>
           <a href="{% url 'tracker:exercise-list' %}" class="btn btn-secondary btn-sm ms-auto rounded-pill px-3">Back to
             list</a>
