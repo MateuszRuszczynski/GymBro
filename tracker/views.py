@@ -156,7 +156,7 @@ class GymUserCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         return self.request.user.is_staff
 
 
-class GymUserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class GymUserUpdateView(LoginRequiredMixin, UpdateView):
     model = GymUser
     context_object_name = "gym_user"
     form_class = GymUserUpdateForm
